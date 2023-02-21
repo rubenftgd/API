@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<STExchangeFile>
+	<fileHeader company="Schneider Automation" product="Unity Pro XLS V13.0 - 170914B" dateTime="date_and_time#2019-4-18-17:18:31" content="Structured source file" DTDVersion="41"></fileHeader>
+	<contentHeader name="Project" version="0.0.46" dateTime="date_and_time#2019-4-18-17:51:36"></contentHeader>
+	<program>
+		<identProgram name="SR_get_key_v4" type="SR" task="MAST"></identProgram>
+		<STSource>(* Subroutine to read keyboard presses (1) *)
+
+
+
+ (* TODO:
+  *
+  *)
+
+
+
+(* IF polling has been requested, initialize timers and column cursor *)
+(* IF RE(M_Poll_Activation)
+	THEN
+	    (* M_Poll_Activation := TRUE; * )
+	    M_poll_COL := 1;
+	    M_key_pressed_ack := FALSE;
+	    M_key := -1;
+END_IF; *)
+
+(* After INIT, calls timer routine *)
+polling_timer_v3 ();
+
+IF M_poll_COL &lt; 5 AND (NOT M_poll_timeout) AND M_Poll_Activation AND (NOT M_key_pressed_ack) (* AND %m30 *)
+THEN
+	(*IF no timeout and no key pressed, keep scanning*)
+
+	    	IF M_Poll_COL = 1 (* AND (NOT M_key_pressed_ack) *)
+		    THEN
+		        Q_KB_COL1 := TRUE;
+		        Q_KB_COL2 := FALSE;
+		        Q_KB_COL3 := FALSE;
+			(* Poll keyboard, column 1*)
+		    	IF I_KB_LINE_1 AND (NOT M_key_pressed_ack)
+			(*user presses 1*)
+			    THEN
+				M_key := 1;
+				M_key_pressed_ack := TRUE;
+			ELSIF I_KB_LINE_2 AND (NOT M_key_pressed_ack)
+			(*user presses 4*)
+			    THEN
+			        M_key := 4;
+			        M_key_pressed_ack := TRUE;
+			ELSIF I_KB_LINE_3 AND (NOT M_key_pressed_ack)
+			(*user presses 7*)
+			    THEN
+			        M_key := 7;
+			        M_key_pressed_ack := TRUE;
+			ELSIF I_KB_LINE_4 AND (NOT M_key_pressed_ack)
+			(*user presses * *)
+			    THEN
+			        M_key := 10;
+			        M_key_pressed_ack := TRUE;
+			END_IF; (* ends 1st column scan *)
+		ELSIF M_Poll_COL = 2 (* AND (NOT M_key_pressed_ack) *)
+		    THEN
+		        Q_KB_COL1 := FALSE;
+	    	        Q_KB_COL2 := TRUE;
+		        Q_KB_COL3 := FALSE;
+		        (*Activates 2nd column*)
+		        IF I_KB_LINE_1 AND (NOT M_key_pressed_ack)
+		        (*user presses 2*)
+		            THEN
+		                M_key := 2;
+		                M_key_pressed_ack := TRUE;
+		        ELSIF I_KB_LINE_2 AND (NOT M_key_pressed_ack)
+		        (*user presses 5*)
+		            THEN
+		                M_key := 5;
+		                M_key_pressed_ack := TRUE;
+			ELSIF I_KB_LINE_3 AND (NOT M_key_pressed_ack)
+			(*user presses 8*)
+			    THEN
+			        M_key := 8;
+			        M_key_pressed_ack := TRUE;
+			ELSIF I_KB_LINE_4 AND (NOT M_key_pressed_ack)
+			(*user presses 0*)
+			    THEN
+			        M_key := 0;
+			        M_key_pressed_ack := TRUE;
+			END_IF;
+		ELSIF M_Poll_COL = 3 (* AND (NOT M_key_pressed_ack) *)
+		    THEN
+			Q_KB_COL1 := FALSE;
+			Q_KB_COL2 := FALSE;
+			Q_KB_COL3 := TRUE;
+		    	IF I_KB_LINE_1 AND (NOT M_key_pressed_ack)
+			(*user presses 3*)
+			    THEN
+			        M_key := 3;
+		        	M_key_pressed_ack := TRUE;
+			ELSIF I_KB_LINE_2 AND (NOT M_key_pressed_ack)
+			(*user presses 6*)
+			    THEN
+			        M_key := 6;
+			        M_key_pressed_ack := TRUE;
+			ELSIF I_KB_LINE_3 AND (NOT M_key_pressed_ack)
+			(*user presses 9*)
+		            THEN
+		 	        M_key := 9;
+		   	        M_key_pressed_ack := TRUE;
+			ELSIF I_KB_LINE_4 AND (NOT M_key_pressed_ack)
+			(*user presses # *)
+			    THEN
+		 	       M_key := 11;
+		 	       M_key_pressed_ack := TRUE;
+			END_IF;
+			(*deactivates column*)
+		END_IF;
+	(* IF no key detected, keep scanning until timeout defined *)
+	IF FE(M_poll_Timeout_COL) AND NOT(M_key_pressed_ack)
+	    (* if timer expires or key detected, move  to the next column*)
+	    THEN    
+			M_poll_COL := M_poll_COL+1;
+			(* RESETS to COLUMN 1 after 1 complete scan *)
+			IF M_poll_COL = 4
+		    	THEN
+				M_poll_COL := 1;
+			END_IF;
+		END_IF;
+END_IF;
+
+IF M_key_pressed_ack
+    (* IF a key has been pressed, return key and disable keyboard, resetting main timer *)
+    THEN
+	(* Deactivates keyboard *)
+	Q_KB_COL1 := FALSE;
+	Q_KB_COL2 := FALSE;
+	Q_KB_COL3 := FALSE;
+	(* M_Poll_Activation := FALSE; *)
+END_IF;
+IF (M_poll_timeout)
+    (* No key pressed, timeout reached *)
+    THEN
+	(* Timeout, no keys pressed; return "-1" *)
+	M_key := -1;
+	(* Deactivates keyboard *)
+	Q_KB_COL1 := FALSE;
+	Q_KB_COL2 := FALSE;
+	Q_KB_COL3 := FALSE;
+	(* M_Poll_Activation := FALSE; *)
+END_IF;
+
+
+
+(* código antigo...
+(* IF (M_poll_timeout) AND (NOT M_key_pressed_ack)
+	THEN
+	(* Timeout, no keys pressed; return "-1" * )
+	M_key := '-1';
+	(* Deactivates keyboard * )
+	Q_KB_COL1 := FALSE;
+	Q_KB_COL2 := FALSE;
+	Q_KB_COL3 := FALSE;
+	M_Poll_Activation := FALSE;
+END_IF; *)
+</STSource>
+	</program>
+	<dataBlock>
+		<variables name="M_poll_timeout" typeName="EBOOL">
+			<comment>Indicates kbd poll timeout</comment>
+			<attribute name="TimeStampSource" value="0"></attribute>
+		</variables>
+		<variables name="M_key" typeName="INT">
+			<comment>key pressed</comment>
+		</variables>
+		<variables name="Q_KB_COL2" typeName="EBOOL" topologicalAddress="%q0.4.5">
+			<attribute name="TimeStampSource" value="0"></attribute>
+		</variables>
+		<variables name="I_KB_LINE_2" typeName="EBOOL" topologicalAddress="%i0.2.5">
+			<attribute name="TimeStampSource" value="0"></attribute>
+		</variables>
+		<variables name="M_key_pressed_ack" typeName="EBOOL">
+			<comment>key pressed ack</comment>
+			<attribute name="TimeStampSource" value="0"></attribute>
+		</variables>
+		<variables name="M_poll_timeout_COL" typeName="EBOOL">
+			<comment>indicates timeouts of column scanning</comment>
+		</variables>
+		<variables name="TON_POLL" typeName="TON"></variables>
+		<variables name="TP_Polling" typeName="TP"></variables>
+		<variables name="M_Poll_Activation" typeName="EBOOL">
+			<comment>activates polling timer</comment>
+			<attribute name="TimeStampSource" value="0"></attribute>
+		</variables>
+		<variables name="I_KB_LINE_4" typeName="EBOOL" topologicalAddress="%i0.2.7">
+			<attribute name="TimeStampSource" value="0"></attribute>
+		</variables>
+		<variables name="Q_KB_COL1" typeName="EBOOL" topologicalAddress="%q0.4.4">
+			<attribute name="TimeStampSource" value="0"></attribute>
+		</variables>
+		<variables name="Q_KB_COL3" typeName="EBOOL" topologicalAddress="%q0.4.6">
+			<attribute name="TimeStampSource" value="0"></attribute>
+		</variables>
+		<variables name="I_KB_LINE_1" typeName="EBOOL" topologicalAddress="%i0.2.4">
+			<attribute name="TimeStampSource" value="0"></attribute>
+		</variables>
+		<variables name="I_KB_LINE_3" typeName="EBOOL" topologicalAddress="%i0.2.6">
+			<attribute name="TimeStampSource" value="0"></attribute>
+		</variables>
+		<variables name="M_Poll_COL" typeName="INT">
+			<comment>KBD active column</comment>
+		</variables>
+	</dataBlock>
+	<program>
+		<identProgram name="polling_timer_v3" type="SR" task="MAST"></identProgram>
+		<STSource>
+(* Polling timeout, maximum wait for 1 key press *)
+TON_POLL (IN := M_Poll_Activation(*BOOL*),
+          PT := t#30000ms(*TIME*) , 
+          Q =&gt; M_poll_timeout(*BOOL*));
+
+
+(* Time to poll each column of keyboard *)
+TP_Polling (IN := NOT M_poll_timeout_COL (* AND M_Poll_Activation (*BOOL * ) *),
+            PT := t#30ms(*TIME*),
+            Q =&gt; M_poll_timeout_COL(*BOOL*));
+
+(* TP_Silence (IN := NOT(M_poll_Timeout_COL)(*BOOL* ),
+      PT := t#4ms (*TIME* ),
+      Q =&gt; M_poll_silence(*BOOL* ) ); *)
+
+
+
+
+
+(* IF M_key_wait THEN O_Alarm :=NOT(O_Alarm); END_IF; *)
+</STSource>
+	</program>
+</STExchangeFile>

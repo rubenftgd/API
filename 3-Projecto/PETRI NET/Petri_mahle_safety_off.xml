@@ -1,0 +1,955 @@
+<?xml version="1.0" encoding="ISO-8859-1"?><pnml>
+<net id="Net-One" type="P/T net">
+<token id="Default" enabled="true" red="0" green="0" blue="0"/>
+<place id="P00 - OFF">
+<graphics>
+<position x="735.0" y="45.0"/>
+</graphics>
+<name>
+<value>P00 - OFF</value>
+<graphics>
+<offset x="94.0" y="10.0"/>
+</graphics>
+</name>
+<initialMarking>
+<value>Default,1</value>
+<graphics>
+<offset x="0.0" y="0.0"/>
+</graphics>
+</initialMarking>
+<capacity>
+<value>0</value>
+</capacity>
+</place>
+<place id="P01 - Safety Check">
+<graphics>
+<position x="735.0" y="165.0"/>
+</graphics>
+<name>
+<value>P01 - Safety Check</value>
+<graphics>
+<offset x="7.0" y="0.0"/>
+</graphics>
+</name>
+<initialMarking>
+<value>Default,0</value>
+<graphics>
+<offset x="0.0" y="0.0"/>
+</graphics>
+</initialMarking>
+<capacity>
+<value>0</value>
+</capacity>
+</place>
+<place id="P02 - ON">
+<graphics>
+<position x="730.0" y="325.0"/>
+</graphics>
+<name>
+<value>P02 - ON</value>
+<graphics>
+<offset x="71.0" y="47.0"/>
+</graphics>
+</name>
+<initialMarking>
+<value>Default,0</value>
+<graphics>
+<offset x="0.0" y="0.0"/>
+</graphics>
+</initialMarking>
+<capacity>
+<value>0</value>
+</capacity>
+</place>
+<place id="P03 - Maintenance needed">
+<graphics>
+<position x="390.0" y="315.0"/>
+</graphics>
+<name>
+<value>P03 - Maintenance needed</value>
+<graphics>
+<offset x="0.0" y="0.0"/>
+</graphics>
+</name>
+<initialMarking>
+<value>Default,0</value>
+<graphics>
+<offset x="0.0" y="0.0"/>
+</graphics>
+</initialMarking>
+<capacity>
+<value>0</value>
+</capacity>
+</place>
+<place id="P05 - LOAD Segmentos">
+<graphics>
+<position x="730.0" y="460.0"/>
+</graphics>
+<name>
+<value>P05 - LOAD Segmentos</value>
+<graphics>
+<offset x="165.0" y="4.0"/>
+</graphics>
+</name>
+<initialMarking>
+<value>Default,0</value>
+<graphics>
+<offset x="0.0" y="0.0"/>
+</graphics>
+</initialMarking>
+<capacity>
+<value>0</value>
+</capacity>
+</place>
+<place id="P06 - Wait (posicionamento, alinhamento segmentos e ferramenta)">
+<graphics>
+<position x="730.0" y="580.0"/>
+</graphics>
+<name>
+<value>P06 - Wait (posicionamento, alinhamento segmentos e ferramenta)</value>
+<graphics>
+<offset x="367.0" y="23.0"/>
+</graphics>
+</name>
+<initialMarking>
+<value>Default,0</value>
+<graphics>
+<offset x="0.0" y="0.0"/>
+</graphics>
+</initialMarking>
+<capacity>
+<value>0</value>
+</capacity>
+</place>
+<place id="P07 - Processing job">
+<graphics>
+<position x="730.0" y="670.0"/>
+</graphics>
+<name>
+<value>P07 - Processing job</value>
+<graphics>
+<offset x="155.0" y="4.0"/>
+</graphics>
+</name>
+<initialMarking>
+<value>Default,0</value>
+<graphics>
+<offset x="0.0" y="0.0"/>
+</graphics>
+</initialMarking>
+<capacity>
+<value>0</value>
+</capacity>
+</place>
+<place id="P08 - Wait (tool retraction, motors deactivation)">
+<graphics>
+<position x="730.0" y="775.0"/>
+</graphics>
+<name>
+<value>P08 - Wait (tool retraction, motors deactivation)</value>
+<graphics>
+<offset x="284.0" y="-5.0"/>
+</graphics>
+</name>
+<initialMarking>
+<value>Default,0</value>
+<graphics>
+<offset x="0.0" y="0.0"/>
+</graphics>
+</initialMarking>
+<capacity>
+<value>0</value>
+</capacity>
+</place>
+<transition id="T00 - ON">
+<graphics>
+<position x="735.0" y="90.0"/>
+</graphics>
+<name>
+<value>T00 - ON</value>
+<graphics>
+<offset x="-5.0" y="35.0"/>
+</graphics>
+</name>
+<orientation>
+<value>90</value>
+</orientation>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>false</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T01 - ALL OK">
+<graphics>
+<position x="735.0" y="255.0"/>
+</graphics>
+<name>
+<value>T01 - ALL OK</value>
+<graphics>
+<offset x="109.0" y="16.0"/>
+</graphics>
+</name>
+<orientation>
+<value>90</value>
+</orientation>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>false</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T02 - Maintenance counter treshold">
+<graphics>
+<position x="390.0" y="255.0"/>
+</graphics>
+<name>
+<value>T02 - Maintenance counter treshold</value>
+<graphics>
+<offset x="34.0" y="5.0"/>
+</graphics>
+</name>
+<orientation>
+<value>90</value>
+</orientation>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>false</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T04 - Abre porta, selecciona operação de carregamento">
+<graphics>
+<position x="730.0" y="385.0"/>
+</graphics>
+<name>
+<value>T04 - Abre porta, selecciona operação de carregamento</value>
+<graphics>
+<offset x="324.0" y="31.0"/>
+</graphics>
+</name>
+<orientation>
+<value>90</value>
+</orientation>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>false</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T05 - Fecha porta, carrega em START">
+<graphics>
+<position x="730.0" y="520.0"/>
+</graphics>
+<name>
+<value>T05 - Fecha porta, carrega em START</value>
+<graphics>
+<offset x="235.0" y="11.0"/>
+</graphics>
+</name>
+<orientation>
+<value>90</value>
+</orientation>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>false</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T06 - Wait over, ALL OK">
+<graphics>
+<position x="730.0" y="625.0"/>
+</graphics>
+<name>
+<value>T06 - Wait over, ALL OK</value>
+<graphics>
+<offset x="170.0" y="12.0"/>
+</graphics>
+</name>
+<orientation>
+<value>90</value>
+</orientation>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>false</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T07 - Reached End Of Magazine (out of jobs)">
+<graphics>
+<position x="730.0" y="715.0"/>
+</graphics>
+<name>
+<value>T07 - Reached End Of Magazine (out of jobs)</value>
+<graphics>
+<offset x="270.0" y="10.0"/>
+</graphics>
+</name>
+<orientation>
+<value>90</value>
+</orientation>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>false</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T08 - Wait Over, ALL OK">
+<graphics>
+<position x="730.0" y="835.0"/>
+</graphics>
+<name>
+<value>T08 - Wait Over, ALL OK</value>
+<graphics>
+<offset x="170.0" y="15.0"/>
+</graphics>
+</name>
+<orientation>
+<value>90</value>
+</orientation>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>false</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T10 - Disable machine">
+<graphics>
+<position x="1135.0" y="310.0"/>
+</graphics>
+<name>
+<value>T10 - Disable machine</value>
+<graphics>
+<offset x="74.44444444444423" y="27.444444444444457"/>
+</graphics>
+</name>
+<orientation>
+<value>90</value>
+</orientation>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>false</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T17 - Disable machine">
+<graphics>
+<position x="1345.0" y="775.0"/>
+</graphics>
+<name>
+<value>T17 - Disable machine</value>
+<graphics>
+<offset x="29.111111111111256" y="36.888888888888886"/>
+</graphics>
+</name>
+<orientation>
+<value>90</value>
+</orientation>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>false</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T17 - Disable Machine">
+<graphics>
+<position x="390.0" y="375.0"/>
+</graphics>
+<name>
+<value>T17 - Disable Machine</value>
+<graphics>
+<offset x="75.66666666666666" y="51.111111111111114"/>
+</graphics>
+</name>
+<orientation>
+<value>90</value>
+</orientation>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>false</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T18 - Disable machine">
+<graphics>
+<position x="1300.0" y="685.0"/>
+</graphics>
+<name>
+<value>T18 - Disable machine</value>
+<graphics>
+<offset x="48.333333333333435" y="37.222222222222264"/>
+</graphics>
+</name>
+<orientation>
+<value>90</value>
+</orientation>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>false</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T19 - Disable machine">
+<graphics>
+<position x="1255.0" y="565.0"/>
+</graphics>
+<name>
+<value>T19 - Disable machine</value>
+<graphics>
+<offset x="37.222222222222264" y="36.11111111111114"/>
+</graphics>
+</name>
+<orientation>
+<value>90</value>
+</orientation>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>false</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T20 - Disable machine">
+<graphics>
+<position x="1210.0" y="460.0"/>
+</graphics>
+<name>
+<value>T20 - Disable machine</value>
+<graphics>
+<offset x="37.555555555555685" y="36.11111111111112"/>
+</graphics>
+</name>
+<orientation>
+<value>90</value>
+</orientation>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>false</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T21 - Disable Machine">
+<graphics>
+<position x="900.0" y="165.0"/>
+</graphics>
+<name>
+<value>T21 - Disable Machine</value>
+<graphics>
+<offset x="77.0" y="33.0"/>
+</graphics>
+</name>
+<orientation>
+<value>90</value>
+</orientation>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>false</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<arc id="P00 - OFF to T00 - ON" source="P00 - OFF" target="T00 - ON">
+<graphics/>
+<inscription>
+<value>Default,1</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="746" y="71" curvePoint="false"/>
+<arcpath id="001" x="746" y="96" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="P01 - Safety Check to T01 - ALL OK" source="P01 - Safety Check" target="T01 - ALL OK">
+<graphics/>
+<inscription>
+<value>Default,1</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="746" y="191" curvePoint="false"/>
+<arcpath id="001" x="746" y="261" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="P01 - Safety Check to T02 - Maintenance counter treshold" source="P01 - Safety Check" target="T02 - Maintenance counter treshold">
+<graphics/>
+<inscription>
+<value>Default,1</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="732" y="180" curvePoint="false"/>
+<arcpath id="001" x="416" y="267" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="P01 - Safety Check to T21 - Disable Machine" source="P01 - Safety Check" target="T21 - Disable Machine">
+<graphics/>
+<inscription>
+<value>Default,1</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="762" y="177" curvePoint="false"/>
+<arcpath id="001" x="896" y="177" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="P02 - ON to T04 - Abre porta, selecciona operação de carregamento" source="P02 - ON" target="T04 - Abre porta, selecciona operação de carregamento">
+<graphics/>
+<inscription>
+<value>Default,1</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="741" y="351" curvePoint="false"/>
+<arcpath id="001" x="741" y="391" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="P02 - ON to T10 - Disable machine" source="P02 - ON" target="T10 - Disable machine">
+<graphics/>
+<inscription>
+<value>Default,1</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="756" y="336" curvePoint="false"/>
+<arcpath id="001" x="1131" y="322" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="P03 - Maintenance needed to T17 - Disable Machine" source="P03 - Maintenance needed" target="T17 - Disable Machine">
+<graphics/>
+<inscription>
+<value>Default,1</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="401" y="341" curvePoint="false"/>
+<arcpath id="001" x="401" y="381" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="P05 - LOAD Segmentos to T05 - Fecha porta, carrega em START" source="P05 - LOAD Segmentos" target="T05 - Fecha porta, carrega em START">
+<graphics/>
+<inscription>
+<value>Default,1</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="741" y="486" curvePoint="false"/>
+<arcpath id="001" x="741" y="526" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="P05 - LOAD Segmentos to T20 - Disable machine" source="P05 - LOAD Segmentos" target="T20 - Disable machine">
+<graphics/>
+<inscription>
+<value>Default,1</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="757" y="472" curvePoint="false"/>
+<arcpath id="001" x="1206" y="472" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="P06 - Wait (posicionamento, alinhamento segmentos e ferramenta) to T06 - Wait over, ALL OK" source="P06 - Wait (posicionamento, alinhamento segmentos e ferramenta)" target="T06 - Wait over, ALL OK">
+<graphics/>
+<inscription>
+<value>Default,1</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="741" y="606" curvePoint="false"/>
+<arcpath id="001" x="741" y="631" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="P06 - Wait (posicionamento, alinhamento segmentos e ferramenta) to T19 - Disable machine" source="P06 - Wait (posicionamento, alinhamento segmentos e ferramenta)" target="T19 - Disable machine">
+<graphics/>
+<inscription>
+<value>Default,1</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="756" y="591" curvePoint="false"/>
+<arcpath id="001" x="1251" y="577" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="P07 - Processing job to T07 - Reached End Of Magazine (out of jobs)" source="P07 - Processing job" target="T07 - Reached End Of Magazine (out of jobs)">
+<graphics/>
+<inscription>
+<value>Default,1</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="741" y="696" curvePoint="false"/>
+<arcpath id="001" x="741" y="721" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="P07 - Processing job to T18 - Disable machine" source="P07 - Processing job" target="T18 - Disable machine">
+<graphics/>
+<inscription>
+<value>Default,1</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="756" y="682" curvePoint="false"/>
+<arcpath id="001" x="1296" y="697" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="P08 - Wait (tool retraction, motors deactivation) to T08 - Wait Over, ALL OK" source="P08 - Wait (tool retraction, motors deactivation)" target="T08 - Wait Over, ALL OK">
+<graphics/>
+<inscription>
+<value>Default,1</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="741" y="801" curvePoint="false"/>
+<arcpath id="001" x="741" y="841" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="P08 - Wait (tool retraction, motors deactivation) to T17 - Disable machine" source="P08 - Wait (tool retraction, motors deactivation)" target="T17 - Disable machine">
+<graphics/>
+<inscription>
+<value>Default,1</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="757" y="787" curvePoint="false"/>
+<arcpath id="001" x="1341" y="787" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="T00 - ON to P01 - Safety Check" source="T00 - ON" target="P01 - Safety Check">
+<graphics/>
+<inscription>
+<value>Default,1</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="746" y="106" curvePoint="false"/>
+<arcpath id="001" x="746" y="162" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="T01 - ALL OK to P02 - ON" source="T01 - ALL OK" target="P02 - ON">
+<graphics/>
+<inscription>
+<value>Default,1</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="746" y="271" curvePoint="false"/>
+<arcpath id="001" x="743" y="322" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="T02 - Maintenance counter treshold to P03 - Maintenance needed" source="T02 - Maintenance counter treshold" target="P03 - Maintenance needed">
+<graphics/>
+<inscription>
+<value>Default,1</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="401" y="271" curvePoint="false"/>
+<arcpath id="001" x="401" y="312" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="T04 - Abre porta, selecciona operação de carregamento to P05 - LOAD Segmentos" source="T04 - Abre porta, selecciona operação de carregamento" target="P05 - LOAD Segmentos">
+<graphics/>
+<inscription>
+<value>Default,1</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="741" y="401" curvePoint="false"/>
+<arcpath id="001" x="741" y="457" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="T05 - Fecha porta, carrega em START to P06 - Wait (posicionamento, alinhamento segmentos e ferramenta)" source="T05 - Fecha porta, carrega em START" target="P06 - Wait (posicionamento, alinhamento segmentos e ferramenta)">
+<graphics/>
+<inscription>
+<value>Default,1</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="741" y="536" curvePoint="false"/>
+<arcpath id="001" x="741" y="577" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="T06 - Wait over, ALL OK to P07 - Processing job" source="T06 - Wait over, ALL OK" target="P07 - Processing job">
+<graphics/>
+<inscription>
+<value>Default,1</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="741" y="641" curvePoint="false"/>
+<arcpath id="001" x="741" y="667" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="T07 - Reached End Of Magazine (out of jobs) to P08 - Wait (tool retraction, motors deactivation)" source="T07 - Reached End Of Magazine (out of jobs)" target="P08 - Wait (tool retraction, motors deactivation)">
+<graphics/>
+<inscription>
+<value>Default,1</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="741" y="731" curvePoint="false"/>
+<arcpath id="001" x="741" y="772" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="T08 - Wait Over, ALL OK to P02 - ON" source="T08 - Wait Over, ALL OK" target="P02 - ON">
+<graphics/>
+<inscription>
+<value>Default,1</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="741" y="851" curvePoint="false"/>
+<arcpath id="001" x="743" y="886" curvePoint="false"/>
+<arcpath id="002" x="636" y="882" curvePoint="false"/>
+<arcpath id="003" x="629" y="332" curvePoint="false"/>
+<arcpath id="004" x="727" y="336" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="T10 - Disable machine to P00 - OFF" source="T10 - Disable machine" target="P00 - OFF">
+<graphics/>
+<inscription>
+<value>Default,1</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="1146" y="316" curvePoint="false"/>
+<arcpath id="001" x="1136" y="266" curvePoint="false"/>
+<arcpath id="002" x="760" y="64" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="T17 - Disable machine to P00 - OFF" source="T17 - Disable machine" target="P00 - OFF">
+<graphics/>
+<inscription>
+<value>Default,1</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="1356" y="781" curvePoint="false"/>
+<arcpath id="001" x="1334" y="259" curvePoint="false"/>
+<arcpath id="002" x="761" y="61" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="T17 - Disable Machine to P00 - OFF" source="T17 - Disable Machine" target="P00 - OFF">
+<graphics/>
+<inscription>
+<value>Default,1</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="386" y="387" curvePoint="false"/>
+<arcpath id="001" x="236" y="387" curvePoint="false"/>
+<arcpath id="002" x="231" y="57" curvePoint="false"/>
+<arcpath id="003" x="732" y="57" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="T18 - Disable machine to P00 - OFF" source="T18 - Disable machine" target="P00 - OFF">
+<graphics/>
+<inscription>
+<value>Default,1</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="1311" y="691" curvePoint="false"/>
+<arcpath id="001" x="1285" y="269" curvePoint="false"/>
+<arcpath id="002" x="760" y="62" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="T19 - Disable machine to P00 - OFF" source="T19 - Disable machine" target="P00 - OFF">
+<graphics/>
+<inscription>
+<value>Default,1</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="1266" y="571" curvePoint="false"/>
+<arcpath id="001" x="1249" y="277" curvePoint="false"/>
+<arcpath id="002" x="760" y="63" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="T20 - Disable machine to P00 - OFF" source="T20 - Disable machine" target="P00 - OFF">
+<graphics/>
+<inscription>
+<value>Default,1</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="1221" y="466" curvePoint="false"/>
+<arcpath id="001" x="1191" y="279" curvePoint="false"/>
+<arcpath id="002" x="760" y="63" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="T21 - Disable Machine to P00 - OFF" source="T21 - Disable Machine" target="P00 - OFF">
+<graphics/>
+<inscription>
+<value>Default,1</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="911" y="171" curvePoint="false"/>
+<arcpath id="001" x="759" y="65" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+</net>
+</pnml>

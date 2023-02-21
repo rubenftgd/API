@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<LDExchangeFile>
+	<fileHeader company="Schneider Automation" product="Unity Pro XLS V13.0 - 170914B" dateTime="date_and_time#2019-4-11-9:3:4" content="Ladder source file" DTDVersion="41"></fileHeader>
+	<contentHeader name="Project" version="0.0.122" dateTime="date_and_time#2019-4-7-20:38:34"></contentHeader>
+	<program>
+		<identProgram name="SR_DP" type="SR" task="MAST"></identProgram>
+		<LDSource nbColumns="11">
+			<networkLD>
+				<typeLine>
+					<emptyLine nbRows="100"></emptyLine>
+				</typeLine>
+			</networkLD>
+		</LDSource>
+	</program>
+</LDExchangeFile>

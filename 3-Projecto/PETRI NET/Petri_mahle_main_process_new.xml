@@ -1,0 +1,512 @@
+<?xml version="1.0" encoding="ISO-8859-1"?><pnml>
+<net id="Net-One" type="P/T net">
+<token id="Default" enabled="true" red="0" green="0" blue="0"/>
+<place id="P00 - OFF">
+<graphics>
+<position x="105.0" y="135.0"/>
+</graphics>
+<name>
+<value>P00 - OFF</value>
+<graphics>
+<offset x="94.0" y="21.0"/>
+</graphics>
+</name>
+<initialMarking>
+<value>Default,1</value>
+<graphics>
+<offset x="0.0" y="0.0"/>
+</graphics>
+</initialMarking>
+<capacity>
+<value>0</value>
+</capacity>
+</place>
+<place id="P01 - Safety Check">
+<graphics>
+<position x="105.0" y="285.0"/>
+</graphics>
+<name>
+<value>P01 - Safety Check</value>
+<graphics>
+<offset x="134.0" y="20.0"/>
+</graphics>
+</name>
+<initialMarking>
+<value>Default,0</value>
+<graphics>
+<offset x="0.0" y="0.0"/>
+</graphics>
+</initialMarking>
+<capacity>
+<value>0</value>
+</capacity>
+</place>
+<place id="P02 - ON">
+<graphics>
+<position x="225.0" y="405.0"/>
+</graphics>
+<name>
+<value>P02 - ON</value>
+<graphics>
+<offset x="11.0" y="49.0"/>
+</graphics>
+</name>
+<initialMarking>
+<value>Default,0</value>
+<graphics>
+<offset x="0.0" y="0.0"/>
+</graphics>
+</initialMarking>
+<capacity>
+<value>0</value>
+</capacity>
+</place>
+<place id="P05 - LOAD Piston Rings">
+<graphics>
+<position x="405.0" y="405.0"/>
+</graphics>
+<name>
+<value>P05 - LOAD Piston Rings</value>
+<graphics>
+<offset x="69.0" y="49.0"/>
+</graphics>
+</name>
+<initialMarking>
+<value>Default,0</value>
+<graphics>
+<offset x="0.0" y="0.0"/>
+</graphics>
+</initialMarking>
+<capacity>
+<value>0</value>
+</capacity>
+</place>
+<place id="P06 - Wait (tools and parts setup)">
+<graphics>
+<position x="585.0" y="405.0"/>
+</graphics>
+<name>
+<value>P06 - Wait (tools and parts setup)</value>
+<graphics>
+<offset x="98.0" y="43.0"/>
+</graphics>
+</name>
+<initialMarking>
+<value>Default,0</value>
+<graphics>
+<offset x="0.0" y="0.0"/>
+</graphics>
+</initialMarking>
+<capacity>
+<value>0</value>
+</capacity>
+</place>
+<place id="P07 - Processing job">
+<graphics>
+<position x="765.0" y="405.0"/>
+</graphics>
+<name>
+<value>P07 - Processing job</value>
+<graphics>
+<offset x="99.0" y="48.0"/>
+</graphics>
+</name>
+<initialMarking>
+<value>Default,0</value>
+<graphics>
+<offset x="0.0" y="0.0"/>
+</graphics>
+</initialMarking>
+<capacity>
+<value>0</value>
+</capacity>
+</place>
+<place id="P08 - Wait (deactivation)">
+<graphics>
+<position x="990.0" y="405.0"/>
+</graphics>
+<name>
+<value>P08 - Wait (deactivation)</value>
+<graphics>
+<offset x="75.0" y="49.0"/>
+</graphics>
+</name>
+<initialMarking>
+<value>Default,0</value>
+<graphics>
+<offset x="0.0" y="0.0"/>
+</graphics>
+</initialMarking>
+<capacity>
+<value>0</value>
+</capacity>
+</place>
+<transition id="T00 - ON">
+<graphics>
+<position x="105.0" y="210.0"/>
+</graphics>
+<name>
+<value>T00 - ON</value>
+<graphics>
+<offset x="87.0" y="16.0"/>
+</graphics>
+</name>
+<orientation>
+<value>270</value>
+</orientation>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>false</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T01 - ALL OK">
+<graphics>
+<position x="105.0" y="375.0"/>
+</graphics>
+<name>
+<value>T01 - ALL OK</value>
+<graphics>
+<offset x="105.0" y="-6.0"/>
+</graphics>
+</name>
+<orientation>
+<value>45</value>
+</orientation>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>false</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T04 - Open doors, begin loading">
+<graphics>
+<position x="315.0" y="405.0"/>
+</graphics>
+<name>
+<value>T04 - Open doors, begin loading</value>
+<graphics>
+<offset x="94.0" y="-16.0"/>
+</graphics>
+</name>
+<orientation>
+<value>0</value>
+</orientation>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>false</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T05 - Close door, start processing">
+<graphics>
+<position x="495.0" y="405.0"/>
+</graphics>
+<name>
+<value>T05 - Close door, start processing</value>
+<graphics>
+<offset x="109.0" y="-8.0"/>
+</graphics>
+</name>
+<orientation>
+<value>180</value>
+</orientation>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>false</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T06 - Wait over, ALL OK">
+<graphics>
+<position x="675.0" y="405.0"/>
+</graphics>
+<name>
+<value>T06 - Wait over, ALL OK</value>
+<graphics>
+<offset x="84.0" y="-14.0"/>
+</graphics>
+</name>
+<orientation>
+<value>180</value>
+</orientation>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>false</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T07 - End Of Magazine (out of jobs)">
+<graphics>
+<position x="870.0" y="405.0"/>
+</graphics>
+<name>
+<value>T07 - End Of Magazine (out of jobs)</value>
+<graphics>
+<offset x="116.0" y="-17.0"/>
+</graphics>
+</name>
+<orientation>
+<value>180</value>
+</orientation>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>false</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T08 - Wait Over, ALL OK">
+<graphics>
+<position x="1080.0" y="405.0"/>
+</graphics>
+<name>
+<value>T08 - Wait Over, ALL OK</value>
+<graphics>
+<offset x="74.0" y="-13.0"/>
+</graphics>
+</name>
+<orientation>
+<value>180</value>
+</orientation>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>false</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<arc id="P00 - OFF to T00 - ON" source="P00 - OFF" target="T00 - ON">
+<graphics/>
+<inscription>
+<value>Default,1</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="117" y="162" curvePoint="false"/>
+<arcpath id="001" x="117" y="217" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="P01 - Safety Check to T01 - ALL OK" source="P01 - Safety Check" target="T01 - ALL OK">
+<graphics/>
+<inscription>
+<value>Default,1</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="116" y="311" curvePoint="false"/>
+<arcpath id="001" x="112" y="384" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="P02 - ON to T04 - Abre porta, selecciona operação de carregamento" source="P02 - ON" target="T04 - Open doors, begin loading">
+<graphics/>
+<inscription>
+<value>Default,1</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="251" y="417" curvePoint="false"/>
+<arcpath id="001" x="321" y="417" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="P05 - LOAD Segmentos to T05 - Fecha porta, carrega em START" source="P05 - LOAD Piston Rings" target="T05 - Close door, start processing">
+<graphics/>
+<inscription>
+<value>Default,1</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="431" y="417" curvePoint="false"/>
+<arcpath id="001" x="502" y="417" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="P06 - Wait (posicionamento, alinhamento segmentos e ferramenta) to T06 - Wait over, ALL OK" source="P06 - Wait (tools and parts setup)" target="T06 - Wait over, ALL OK">
+<graphics/>
+<inscription>
+<value>Default,1</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="611" y="417" curvePoint="false"/>
+<arcpath id="001" x="682" y="417" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="P07 - Processing job to T07 - Reached End Of Magazine (out of jobs)" source="P07 - Processing job" target="T07 - End Of Magazine (out of jobs)">
+<graphics/>
+<inscription>
+<value>Default,1</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="791" y="417" curvePoint="false"/>
+<arcpath id="001" x="877" y="417" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="P08 - Wait (tool retraction, motors deactivation) to T08 - Wait Over, ALL OK" source="P08 - Wait (deactivation)" target="T08 - Wait Over, ALL OK">
+<graphics/>
+<inscription>
+<value>Default,1</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="1017" y="417" curvePoint="false"/>
+<arcpath id="001" x="1087" y="417" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="T00 - ON to P01 - Safety Check" source="T00 - ON" target="P01 - Safety Check">
+<graphics/>
+<inscription>
+<value>Default,1</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="117" y="227" curvePoint="false"/>
+<arcpath id="001" x="117" y="282" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="T01 - ALL OK to P02 - ON" source="T01 - ALL OK" target="P02 - ON">
+<graphics/>
+<inscription>
+<value>Default,1</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="120" y="390" curvePoint="false"/>
+<arcpath id="001" x="222" y="413" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="T04 - Abre porta, selecciona operação de carregamento to P05 - LOAD Segmentos" source="T04 - Open doors, begin loading" target="P05 - LOAD Piston Rings">
+<graphics/>
+<inscription>
+<value>Default,1</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="331" y="417" curvePoint="false"/>
+<arcpath id="001" x="402" y="417" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="T05 - Fecha porta, carrega em START to P06 - Wait (posicionamento, alinhamento segmentos e ferramenta)" source="T05 - Close door, start processing" target="P06 - Wait (tools and parts setup)">
+<graphics/>
+<inscription>
+<value>Default,1</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="512" y="416" curvePoint="false"/>
+<arcpath id="001" x="582" y="417" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="T06 - Wait over, ALL OK to P07 - Processing job" source="T06 - Wait over, ALL OK" target="P07 - Processing job">
+<graphics/>
+<inscription>
+<value>Default,1</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="692" y="416" curvePoint="false"/>
+<arcpath id="001" x="762" y="417" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="T07 - Reached End Of Magazine (out of jobs) to P08 - Wait (tool retraction, motors deactivation)" source="T07 - End Of Magazine (out of jobs)" target="P08 - Wait (deactivation)">
+<graphics/>
+<inscription>
+<value>Default,1</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="887" y="416" curvePoint="false"/>
+<arcpath id="001" x="987" y="417" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="T08 - Wait Over, ALL OK to P02 - ON" source="T08 - Wait Over, ALL OK" target="P02 - ON">
+<graphics/>
+<inscription>
+<value>Default,1</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="1097" y="416" curvePoint="false"/>
+<arcpath id="001" x="1164" y="422" curvePoint="false"/>
+<arcpath id="002" x="1162" y="508" curvePoint="false"/>
+<arcpath id="003" x="240" y="513" curvePoint="false"/>
+<arcpath id="004" x="237" y="431" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+</net>
+</pnml>

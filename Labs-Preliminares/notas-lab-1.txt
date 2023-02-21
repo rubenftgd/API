@@ -1,0 +1,57 @@
+Pass do lab (código da porta):
+
+1967
+
+<--------------------------------->
+
+Login:
+
+api
+api-alunos
+
+<--------------------------------->
+
+Matlab:
+
+>> login_api c2
+
+>> !start .
+
+c:\users2\api\c2\
+
+>> exit
+
+<--------------------------------->
+
+Unity Pro:
+
+c:\users2\api\c2\lab01
+
+File -> New
+
+Version number: 1634M or 2634M -> Version 2.00
+
+
+1 - Duplo click no 0:X - Bus
+2 - Click TSX RKY 6Ex
+
+<--------------------------------->
+
+Indicate the modules names:
+
+	Input:
+		- DEY 16D2
+	Output:
+		- DSY 16T2
+	- DMY28FK
+
+Connect the Ethernet:
+
+	- ETY Port channel 0 ETH TCP-IP.
+
+PLC -> Standad Mode
+	
+	-> Connect
+	-> Transfer
+
+<--------------------------------->

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<VariablesExchangeFile>
+	<fileHeader company="Schneider Automation" product="Unity Pro XLS V13.0 - 170914B" dateTime="date_and_time#2019-4-11-9:3:48" content="Variable source file" DTDVersion="41"></fileHeader>
+	<contentHeader name="Project" version="0.0.122" dateTime="date_and_time#2019-4-7-20:38:34"></contentHeader>
+	<dataBlock>
+		<variables name="TON_1" typeName="TON"></variables>
+		<variables name="TP_wait_between_key" typeName="TP"></variables>
+		<variables name="TON_wait_between_key_2" typeName="TON"></variables>
+		<variables name="TON_2" typeName="TON"></variables>
+		<variables name="TOF_0" typeName="TOF"></variables>
+		<variables name="TON_3" typeName="TON"></variables>
+		<variables name="TON_6" typeName="TON"></variables>
+		<variables name="TON_POLL" typeName="TON"></variables>
+		<variables name="TON_4" typeName="TON"></variables>
+		<variables name="TON_5" typeName="TON"></variables>
+		<variables name="TP_Polling" typeName="TP"></variables>
+		<variables name="TP_keypress_ack" typeName="TP"></variables>
+		<variables name="TON_Alarm_Enable" typeName="TON"></variables>
+		<variables name="TON_wait_for_buzzer" typeName="TON"></variables>
+		<variables name="TP_Silence" typeName="TP"></variables>
+		<variables name="TON_wait_between_key" typeName="TON"></variables>
+	</dataBlock>
+</VariablesExchangeFile>

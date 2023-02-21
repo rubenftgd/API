@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<TABExchangeFile>
+	<fileHeader company="Schneider Automation" product="Unity Pro XLS V13.0 - 170914B" dateTime="date_and_time#2019-4-11-9:3:59" content="Animation Table source file" DTDVersion="41"></fileHeader>
+	<contentHeader name="Project" version="0.0.122" dateTime="date_and_time#2019-4-7-20:38:34"></contentHeader>
+	<animationTable name="Testing" location="" version="1.0" dateTime="date_and_time#2019-4-11-9:3:59" ExtStringAnim="0" ExtStringAnimLen="100" PouOwner="Project">
+		<elementDescription displayBase="4" name="M_Poll_Activation"></elementDescription>
+		<elementDescription displayBase="4" name="Q_KB_COL1"></elementDescription>
+		<elementDescription displayBase="4" name="Q_KB_COL2"></elementDescription>
+		<elementDescription displayBase="4" name="Q_KB_COL3"></elementDescription>
+		<elementDescription displayBase="4" name="I_KB_LINE_1"></elementDescription>
+		<elementDescription displayBase="4" name="I_KB_LINE_2"></elementDescription>
+		<elementDescription displayBase="4" name="I_KB_LINE_3"></elementDescription>
+		<elementDescription displayBase="4" name="I_KB_LINE_4"></elementDescription>
+		<elementDescription displayBase="4" name="M_poll_timeout"></elementDescription>
+		<elementDescription displayBase="4" name="M_key_pressed_ack"></elementDescription>
+		<elementDescription displayBase="4" name="M_key"></elementDescription>
+		<elementDescription displayBase="4" name="M_MODE"></elementDescription>
+		<elementDescription displayBase="4" name="I_Ativo"></elementDescription>
+		<elementDescription displayBase="4" name="M_poll_COL"></elementDescription>
+		<elementDescription displayBase="4" name="I_Sensor"></elementDescription>
+		<elementDescription displayBase="4" name="O_Alarm"></elementDescription>
+		<elementDescription displayBase="4" name="M_cursor"></elementDescription>
+		<elementDescription displayBase="4" name="M_buffer"></elementDescription>
+		<elementDescription displayBase="4" name="%SW27"></elementDescription>
+		<elementDescription displayBase="4" name="%SW28"></elementDescription>
+		<elementDescription displayBase="4" name="%SW29"></elementDescription>
+		<elementDescription displayBase="4" name="%SW30"></elementDescription>
+		<elementDescription displayBase="4" name="%SW31"></elementDescription>
+		<elementDescription displayBase="4" name="%SW32"></elementDescription>
+	</animationTable>
+</TABExchangeFile>

@@ -1,0 +1,515 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<STExchangeFile>
+	<fileHeader company="Schneider Automation" product="Unity Pro XLS V13.0 - 170914B" dateTime="date_and_time#2019-4-18-17:18:58" content="Structured source file" DTDVersion="41"></fileHeader>
+	<contentHeader name="Project" version="0.0.46" dateTime="date_and_time#2019-4-18-17:51:36"></contentHeader>
+	<program>
+		<identProgram name="mode" type="section" task="MAST"></identProgram>
+		<STSource>(*MODE DETECTION SUBROUTINE
+
+DETECTS SYSTEM MODE, BASED ON SWITCHES*)
+
+IF (NOT I_DP) AND (NOT I_Ativo)
+	THEN
+	    M_MODE := 0;
+	    O_DP := FALSE;
+	    O_ativo := FALSE;
+	    O_Alarm := FALSE;
+	    %M20 := FALSE;
+	    %M24 := FALSE;
+	    O_Buzzer := FALSE;		
+END_IF;
+IF RE(I_Ativo)
+	THEN
+	(* init code and valid code flags *)
+	    M_CODE := 1234;
+	    M_valid_code := FALSE;
+	    M_code_inserted := FALSE;
+	    M_change_code := FALSE;
+	    O_DP := FALSE;
+	    O_ativo := FALSE;
+	    O_Alarm := FALSE;
+END_IF;
+IF I_Ativo
+	THEN
+	    M_MODE := 2; 
+	    SR_active ();
+ELSIF I_DP
+	THEN
+    	    M_MODE := 1;
+	    O_DP := FALSE;
+	    O_ativo := FALSE;
+	    O_Alarm := FALSE;
+	    %M20 := FALSE;
+	    %M24 := FALSE;
+	    O_Buzzer := FALSE;
+	    SR_DP ();
+END_IF;
+</STSource>
+	</program>
+	<dataBlock>
+		<variables name="M_code_inserted" typeName="EBOOL"></variables>
+		<variables name="M_valid_code" typeName="EBOOL"></variables>
+		<variables name="M_MODE" typeName="INT">
+			<comment>mode indicator</comment>
+		</variables>
+		<variables name="I_sensor" typeName="EBOOL" topologicalAddress="%i0.2.2">
+			<attribute name="TimeStampSource" value="0"></attribute>
+		</variables>
+		<variables name="TOF_2" typeName="TOF"></variables>
+		<variables name="O_DP" typeName="EBOOL" topologicalAddress="%q0.4.2">
+			<attribute name="TimeStampSource" value="0"></attribute>
+		</variables>
+		<variables name="O_Buzzer" typeName="EBOOL" topologicalAddress="%q0.4.0">
+			<comment>buzzer output</comment>
+			<attribute name="TimeStampSource" value="0"></attribute>
+		</variables>
+		<variables name="TOF_1" typeName="TOF"></variables>
+		<variables name="M_change_code" typeName="EBOOL"></variables>
+		<variables name="O_Ativo" typeName="EBOOL" topologicalAddress="%q0.4.3">
+			<attribute name="TimeStampSource" value="0"></attribute>
+		</variables>
+		<variables name="I_DP" typeName="EBOOL" topologicalAddress="%i0.2.1">
+			<attribute name="TimeStampSource" value="0"></attribute>
+		</variables>
+		<variables name="I_Ativo" typeName="EBOOL" topologicalAddress="%i0.2.0">
+			<attribute name="TimeStampSource" value="0"></attribute>
+		</variables>
+		<variables name="O_Alarm" typeName="EBOOL" topologicalAddress="%q0.4.1">
+			<attribute name="TimeStampSource" value="0"></attribute>
+		</variables>
+		<variables name="TON_7" typeName="TON"></variables>
+		<variables name="M_buzzer_cycle" typeName="EBOOL">
+			<comment>buzzer on_off cycle</comment>
+			<attribute name="TimeStampSource" value="0"></attribute>
+		</variables>
+		<variables name="TP_wait_between_key" typeName="TP"></variables>
+		<variables name="M_poll_timeout" typeName="EBOOL">
+			<comment>Indicates kbd poll timeout</comment>
+			<attribute name="TimeStampSource" value="0"></attribute>
+		</variables>
+		<variables name="M_key" typeName="INT">
+			<comment>key pressed</comment>
+		</variables>
+		<variables name="M_key_pressed_ack" typeName="EBOOL">
+			<comment>key pressed ack</comment>
+			<attribute name="TimeStampSource" value="0"></attribute>
+		</variables>
+		<variables name="TP_keypress_ack" typeName="TP"></variables>
+		<variables name="M_key_wait" typeName="EBOOL">
+			<comment>can scan 1 more key</comment>
+		</variables>
+		<variables name="Q_KB_COL2" typeName="EBOOL" topologicalAddress="%q0.4.5">
+			<attribute name="TimeStampSource" value="0"></attribute>
+		</variables>
+		<variables name="I_KB_LINE_2" typeName="EBOOL" topologicalAddress="%i0.2.5">
+			<attribute name="TimeStampSource" value="0"></attribute>
+		</variables>
+		<variables name="M_poll_timeout_COL" typeName="EBOOL">
+			<comment>indicates timeouts of column scanning</comment>
+		</variables>
+		<variables name="TON_POLL" typeName="TON"></variables>
+		<variables name="TP_Polling" typeName="TP"></variables>
+		<variables name="M_Poll_Activation" typeName="EBOOL">
+			<comment>activates polling timer</comment>
+			<attribute name="TimeStampSource" value="0"></attribute>
+		</variables>
+		<variables name="I_KB_LINE_4" typeName="EBOOL" topologicalAddress="%i0.2.7">
+			<attribute name="TimeStampSource" value="0"></attribute>
+		</variables>
+		<variables name="Q_KB_COL1" typeName="EBOOL" topologicalAddress="%q0.4.4">
+			<attribute name="TimeStampSource" value="0"></attribute>
+		</variables>
+		<variables name="Q_KB_COL3" typeName="EBOOL" topologicalAddress="%q0.4.6">
+			<attribute name="TimeStampSource" value="0"></attribute>
+		</variables>
+		<variables name="I_KB_LINE_1" typeName="EBOOL" topologicalAddress="%i0.2.4">
+			<attribute name="TimeStampSource" value="0"></attribute>
+		</variables>
+		<variables name="I_KB_LINE_3" typeName="EBOOL" topologicalAddress="%i0.2.6">
+			<attribute name="TimeStampSource" value="0"></attribute>
+		</variables>
+		<variables name="M_Poll_COL" typeName="INT">
+			<comment>KBD active column</comment>
+		</variables>
+		<variables name="M_buzzer_key" typeName="BOOL"></variables>
+		<variables name="M_buffer" typeName="ARRAY[0..9] OF INT" topologicalAddress="%MW70">
+			<comment>Buffer</comment>
+			<attribute name="TimeStampSource" value="0"></attribute>
+		</variables>
+		<variables name="M_cursor" typeName="INT">
+			<comment>Buffer cursor</comment>
+			<attribute name="TimeStampSource" value="0"></attribute>
+		</variables>
+		<variables name="M_CODE" typeName="INT">
+			<comment>system code</comment>
+		</variables>
+		<variables name="TON_8" typeName="TON"></variables>
+	</dataBlock>
+	<program>
+		<identProgram name="SR_DP" type="SR" task="MAST"></identProgram>
+		<STSource>(* DP *)
+TOF_1 (IN := I_sensor(*BOOL*),
+       PT := t#1S(*TIME*),
+       Q =&gt; %M17(*BOOL*));
+
+TOF_2 (IN := I_sensor(*BOOL*),
+       PT := t#5S(*TIME*),
+       Q =&gt; %M18(*BOOL*));
+
+(* luz DP *)
+O_DP := %M18;
+(*Buzzer*)
+O_Buzzer := %M17;
+</STSource>
+	</program>
+	<program>
+		<identProgram name="SR_active" type="SR" task="MAST"></identProgram>
+		<STSource>(* ALTERAR CÓDIGOS *)
+(* adicionar validações/mudanças de código... *)
+
+
+(* Timer 7
+   Used to wait 30 sec before start
+   Detecting people *)
+TON_7 (IN := I_ativo(*BOOL*),
+       PT := t#30s(*TIME*)(*,
+       Q =&gt; %M19(*BOOL* )) *) );
+IF TON_7.Q THEN %M19 := TRUE; ELSE %M19 := FALSE; END_IF;
+
+
+TON_8 (IN := %M19(*BOOL*),
+       PT := t#5s(*TIME*) (*,
+       Q =&gt; %M21(*BOOL* ) *) );
+
+IF TON_8.Q THEN %M21 := TRUE; ELSE %M21 := FALSE; END_IF;
+ 
+
+(* With this on the keyboard column 1 is active *)
+(* Q_KB_COL3 := TRUE; *)
+IF %M20
+    THEN
+	O_Ativo := FALSE;
+	O_Alarm := FALSE;
+	M_buzzer_cycle := FALSE;
+    ELSE
+	IF (%M19 AND I_ativo)
+	    THEN 
+		O_ativo := TRUE;
+		IF (I_sensor OR %M24)
+		    THEN
+			O_Alarm := TRUE;
+			(* Will enter in this if to shut down the alarm *)
+			(* IF I_KB_LINE_4 (* Ja carreguei no # * )
+			    THEN
+				%M20 := TRUE;
+			END_IF; *)
+			IF %M21 (* Oscilador de buzzer *)
+			    THEN
+				M_buzzer_cycle := TRUE;
+			ELSE M_buzzer_cycle := FALSE;
+			END_IF;	
+			SR_get_multiple_keys();
+			IF M_valid_code
+			    THEN
+				%M20 := TRUE;
+			END_IF;
+			%M24 := TRUE; (* Variavel auxiliar para fazer
+				       * com que eu volte a entrar no IF caso o Ladrao 
+				       * saia da casa*)
+		END_IF;
+	END_IF;
+END_IF;
+
+</STSource>
+	</program>
+	<program>
+		<identProgram name="SR_get_multiple_keys" type="SR" task="MAST"></identProgram>
+		<STSource>
+(* MUDAR DECLARAÇÃO DO CÓDIGO DO SISTEMA; MÁ PRÁTICA *)
+
+
+TP_wait_between_key (IN := (M_key_pressed_ack OR M_poll_timeout) AND NOT M_code_inserted,
+                     PT := t#500ms,
+                     Q =&gt; M_key_wait);
+
+TP_keypress_ack (IN := M_key_pressed_ack(*BOOL*),
+	         PT := t#50ms (*TIME*),
+	         Q =&gt; M_buzzer_key(*BOOL*));
+
+(* IF M_key_wait THEN O_Alarm := TRUE;ELSE O_Alarm := FALSE; END_IF; *)
+(* initialises at start and after a key has been pressed *)
+IF FE(M_key_wait) OR RE(M_buzzer_cycle)  OR RE(I_Sensor) 
+    THEN
+    (* M_Poll_Activation := TRUE; *)
+    M_poll_COL := 1;
+    M_key_pressed_ack := FALSE;
+    M_poll_activation := TRUE;
+    M_key := -1;
+    %m30 := TRUE;
+END_IF;
+
+
+SR_get_key_v4();
+
+IF M_key_pressed_ack AND M_Poll_Activation
+    THEN
+	(* O_DP := TRUE; *)
+	IF (M_key = 10)(* * *)
+	    THEN
+		M_cursor := 0;
+		M_buffer[M_cursor] := M_key;
+		M_cursor := M_cursor + 1;
+		M_change_code := TRUE;
+	ELSIF (M_key = 11) (* # *)
+	    THEN
+		M_buffer[M_cursor] := M_key;
+		M_code_inserted := TRUE;
+	ELSE
+		M_buffer[M_cursor] := M_key;
+		M_cursor := M_cursor + 1;
+	END_IF;
+	(* Resets buffer cursor to 0 for values over 9 *)
+	IF M_cursor &gt; 9
+	    THEN
+		M_cursor := 0;
+	END_IF;
+	M_Poll_Activation := FALSE;
+	%m30 := FALSE;
+END_IF;
+
+
+(* IF timeout, flush buffer and reset cursor *)
+(* IF M_poll_timeout
+    THEN
+	M_Poll_Activation := FALSE;
+	%m30 := FALSE;
+	(* FLUSH BUFFER * )
+	FOR M_cursor := 1 TO 9
+	    DO
+	    M_buffer[M_cursor] := -1;
+	END_FOR;
+	M_cursor := 0;
+(* ELSE * )
+	(* O_DP := FALSE; * )
+END_IF; *)
+
+
+(* # pressed, code entered *)
+IF M_code_inserted
+    THEN
+    	IF (M_cursor &lt; 4) (* code is spread across buffer *)
+	    THEN (* roll buffer *)
+	    FOR %MW1 := 1 TO 4 (* aux cursor 1, # times to roll *)
+	        DO
+		    %MW2 := M_buffer[9];(* aux, last element, to beginning *)
+		    FOR %MW3 := 0 TO 8  (* aux cursor #2 *)
+		        DO              (* shift right, from end to beginning *)
+			    M_buffer[9-%MW3] := M_buffer[9-%MW3-1];
+		    END_FOR;
+		    M_buffer[0] := %MW2;       (* previous last element to beginning *)
+		    M_cursor := M_cursor + 1;  (* increase pointer of current "#" position *)
+	    END_FOR;
+	ELSE (* everything ok *)
+	    (* M_CODE := 1234; *)
+	    %MW5:= M_buffer[M_cursor-4]*1000+M_buffer[M_cursor-3]*100+M_buffer[M_cursor-2]*10+M_buffer[M_cursor-1];
+	    IF %MW5 = M_CODE
+	        THEN
+	            M_valid_code := TRUE;
+	    ELSE
+	            M_valid_code := FALSE;        
+	    END_IF;
+	END_IF;
+END_IF;
+
+(* change code, * *)
+(* IF M_change_code
+    THEN
+	M_CODE := (M_buffer[1]*1000+M_buffer[2]*100+M_buffer[3]*10+M_buffer[4]);
+END_IF; *)
+</STSource>
+	</program>
+	<program>
+		<identProgram name="SR_get_key_v4" type="SR" task="MAST"></identProgram>
+		<STSource>(* Subroutine to read keyboard presses (1) *)
+
+
+
+ (* TODO:
+  *
+  *)
+
+
+
+(* IF polling has been requested, initialize timers and column cursor *)
+(* IF RE(M_Poll_Activation)
+	THEN
+	    (* M_Poll_Activation := TRUE; * )
+	    M_poll_COL := 1;
+	    M_key_pressed_ack := FALSE;
+	    M_key := -1;
+END_IF; *)
+
+(* After INIT, calls timer routine *)
+polling_timer_v3 ();
+
+IF M_poll_COL &lt; 5 AND (NOT M_poll_timeout) AND M_Poll_Activation AND (NOT M_key_pressed_ack) (* AND %m30 *)
+THEN
+	(*IF no timeout and no key pressed, keep scanning*)
+
+	    	IF M_Poll_COL = 1 (* AND (NOT M_key_pressed_ack) *)
+		    THEN
+		        Q_KB_COL1 := TRUE;
+		        Q_KB_COL2 := FALSE;
+		        Q_KB_COL3 := FALSE;
+			(* Poll keyboard, column 1*)
+		    	IF I_KB_LINE_1 AND (NOT M_key_pressed_ack)
+			(*user presses 1*)
+			    THEN
+				M_key := 1;
+				M_key_pressed_ack := TRUE;
+			ELSIF I_KB_LINE_2 AND (NOT M_key_pressed_ack)
+			(*user presses 4*)
+			    THEN
+			        M_key := 4;
+			        M_key_pressed_ack := TRUE;
+			ELSIF I_KB_LINE_3 AND (NOT M_key_pressed_ack)
+			(*user presses 7*)
+			    THEN
+			        M_key := 7;
+			        M_key_pressed_ack := TRUE;
+			ELSIF I_KB_LINE_4 AND (NOT M_key_pressed_ack)
+			(*user presses * *)
+			    THEN
+			        M_key := 10;
+			        M_key_pressed_ack := TRUE;
+			END_IF; (* ends 1st column scan *)
+		ELSIF M_Poll_COL = 2 (* AND (NOT M_key_pressed_ack) *)
+		    THEN
+		        Q_KB_COL1 := FALSE;
+	    	        Q_KB_COL2 := TRUE;
+		        Q_KB_COL3 := FALSE;
+		        (*Activates 2nd column*)
+		        IF I_KB_LINE_1 AND (NOT M_key_pressed_ack)
+		        (*user presses 2*)
+		            THEN
+		                M_key := 2;
+		                M_key_pressed_ack := TRUE;
+		        ELSIF I_KB_LINE_2 AND (NOT M_key_pressed_ack)
+		        (*user presses 5*)
+		            THEN
+		                M_key := 5;
+		                M_key_pressed_ack := TRUE;
+			ELSIF I_KB_LINE_3 AND (NOT M_key_pressed_ack)
+			(*user presses 8*)
+			    THEN
+			        M_key := 8;
+			        M_key_pressed_ack := TRUE;
+			ELSIF I_KB_LINE_4 AND (NOT M_key_pressed_ack)
+			(*user presses 0*)
+			    THEN
+			        M_key := 0;
+			        M_key_pressed_ack := TRUE;
+			END_IF;
+		ELSIF M_Poll_COL = 3 (* AND (NOT M_key_pressed_ack) *)
+		    THEN
+			Q_KB_COL1 := FALSE;
+			Q_KB_COL2 := FALSE;
+			Q_KB_COL3 := TRUE;
+		    	IF I_KB_LINE_1 AND (NOT M_key_pressed_ack)
+			(*user presses 3*)
+			    THEN
+			        M_key := 3;
+		        	M_key_pressed_ack := TRUE;
+			ELSIF I_KB_LINE_2 AND (NOT M_key_pressed_ack)
+			(*user presses 6*)
+			    THEN
+			        M_key := 6;
+			        M_key_pressed_ack := TRUE;
+			ELSIF I_KB_LINE_3 AND (NOT M_key_pressed_ack)
+			(*user presses 9*)
+		            THEN
+		 	        M_key := 9;
+		   	        M_key_pressed_ack := TRUE;
+			ELSIF I_KB_LINE_4 AND (NOT M_key_pressed_ack)
+			(*user presses # *)
+			    THEN
+		 	       M_key := 11;
+		 	       M_key_pressed_ack := TRUE;
+			END_IF;
+			(*deactivates column*)
+		END_IF;
+	(* IF no key detected, keep scanning until timeout defined *)
+	IF FE(M_poll_Timeout_COL) AND NOT(M_key_pressed_ack)
+	    (* if timer expires or key detected, move  to the next column*)
+	    THEN    
+			M_poll_COL := M_poll_COL+1;
+			(* RESETS to COLUMN 1 after 1 complete scan *)
+			IF M_poll_COL = 4
+		    	THEN
+				M_poll_COL := 1;
+			END_IF;
+		END_IF;
+END_IF;
+
+IF M_key_pressed_ack
+    (* IF a key has been pressed, return key and disable keyboard, resetting main timer *)
+    THEN
+	(* Deactivates keyboard *)
+	Q_KB_COL1 := FALSE;
+	Q_KB_COL2 := FALSE;
+	Q_KB_COL3 := FALSE;
+	(* M_Poll_Activation := FALSE; *)
+END_IF;
+IF (M_poll_timeout)
+    (* No key pressed, timeout reached *)
+    THEN
+	(* Timeout, no keys pressed; return "-1" *)
+	M_key := -1;
+	(* Deactivates keyboard *)
+	Q_KB_COL1 := FALSE;
+	Q_KB_COL2 := FALSE;
+	Q_KB_COL3 := FALSE;
+	(* M_Poll_Activation := FALSE; *)
+END_IF;
+
+
+
+(* código antigo...
+(* IF (M_poll_timeout) AND (NOT M_key_pressed_ack)
+	THEN
+	(* Timeout, no keys pressed; return "-1" * )
+	M_key := '-1';
+	(* Deactivates keyboard * )
+	Q_KB_COL1 := FALSE;
+	Q_KB_COL2 := FALSE;
+	Q_KB_COL3 := FALSE;
+	M_Poll_Activation := FALSE;
+END_IF; *)
+</STSource>
+	</program>
+	<program>
+		<identProgram name="polling_timer_v3" type="SR" task="MAST"></identProgram>
+		<STSource>
+(* Polling timeout, maximum wait for 1 key press *)
+TON_POLL (IN := M_Poll_Activation(*BOOL*),
+          PT := t#30000ms(*TIME*) , 
+          Q =&gt; M_poll_timeout(*BOOL*));
+
+
+(* Time to poll each column of keyboard *)
+TP_Polling (IN := NOT M_poll_timeout_COL (* AND M_Poll_Activation (*BOOL * ) *),
+            PT := t#30ms(*TIME*),
+            Q =&gt; M_poll_timeout_COL(*BOOL*));
+
+(* TP_Silence (IN := NOT(M_poll_Timeout_COL)(*BOOL* ),
+      PT := t#4ms (*TIME* ),
+      Q =&gt; M_poll_silence(*BOOL* ) ); *)
+
+
+
+
+
+(* IF M_key_wait THEN O_Alarm :=NOT(O_Alarm); END_IF; *)
+</STSource>
+	</program>
+</STExchangeFile>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<STExchangeFile>
+	<fileHeader company="Schneider Automation" product="Unity Pro XLS V13.0 - 170914B" dateTime="date_and_time#2019-4-26-0:24:43" content="Structured source file" DTDVersion="41"></fileHeader>
+	<contentHeader name="Project" version="0.0.135" dateTime="date_and_time#2019-4-26-1:14:52"></contentHeader>
+	<program>
+		<identProgram name="datalogger" type="section" task="MAST"></identProgram>
+		<STSource>(* Memory based logging *)
+
+(* Occupies %MW96..%MW99 aux data, %MW100..%MW139 buffer *)
+(* Other variables: acc, last_acc, scan_cycle_num *)
+
+(* Mark in memory the data logging will be happening *)
+IF %MW97 = 0 THEN
+  %MW97 := 12345;
+  %MW98 := 12345;
+  %MW99 := 2070; (* Matlab matrix 2 x 10 *)
+END_IF;
+
+(* Create a word collecting all inputs *)
+(* "acc" datatype is INT *)
+
+(* datalogger, normal code *)
+acc:=0;
+(* (* IF %i0.2.15 THEN inc(acc); END_IF; acc:= ROL(acc,1);
+IF %i0.2.14 THEN inc(acc); END_IF; acc:= ROL(acc,1);
+IF %i0.2.13 THEN inc(acc); END_IF; acc:= ROL(acc,1); * )
+IF M_valid_code THEN inc(acc); END_IF; acc:= ROL(acc,1);
+IF M_code_inserted THEN inc(acc); END_IF; acc:= ROL(acc,1);
+IF M_key = 11 THEN inc(acc); END_IF; acc:= ROL(acc,1);
+IF M_key = 4 THEN inc(acc); END_IF; acc:= ROL(acc,1);
+IF M_key = 3 THEN inc(acc); END_IF; acc:= ROL(acc,1);
+IF M_key = 2 THEN inc(acc); END_IF; acc:= ROL(acc,1);
+IF M_key = 1 THEN inc(acc); END_IF; acc:= ROL(acc,1);
+IF M_poll_activation THEN inc(acc); END_IF; acc:= ROL(acc,1);
+IF O_buzzer THEN inc(acc); END_IF; acc:= ROL(acc,1);
+IF O_Alarm THEN inc(acc); END_IF; acc:= ROL(acc,1);
+IF I_sensor THEN inc(acc); END_IF; acc:= ROL(acc,1);
+IF O_Ativo THEN inc(acc); END_IF; acc:= ROL(acc,1);
+IF I_ativo THEN inc(acc); END_IF; *)
+
+
+(* datalogger, change code *)
+(* acc:=0;
+(* IF %i0.2.15 THEN inc(acc); END_IF; acc:= ROL(acc,1);* )
+IF M_code_changed THEN inc(acc); END_IF; acc:= ROL(acc,1);
+IF M_key = 6 THEN inc(acc); END_IF; acc:= ROL(acc,1);
+IF M_key = 7 THEN inc(acc); END_IF; acc:= ROL(acc,1);
+IF M_key = 8 THEN inc(acc); END_IF; acc:= ROL(acc,1);
+IF M_key = 9 THEN inc(acc); END_IF; acc:= ROL(acc,1);
+IF M_key = 4 THEN inc(acc); END_IF; acc:= ROL(acc,1);
+IF M_key = 3 THEN inc(acc); END_IF; acc:= ROL(acc,1);
+IF M_key = 2 THEN inc(acc); END_IF; acc:= ROL(acc,1);
+IF M_key = 1 THEN inc(acc); END_IF; acc:= ROL(acc,1);
+IF M_change_code THEN inc(acc); END_IF; acc:= ROL(acc,1);
+IF M_key = 10 THEN inc(acc); END_IF; acc:= ROL(acc,1);
+IF O_Buzzer THEN inc(acc); END_IF; acc:= ROL(acc,1);
+IF M_buzzer_key THEN inc(acc); END_IF; acc:= ROL(acc,1);
+IF M_poll_activation THEN inc(acc); END_IF; acc:= ROL(acc,1);
+IF I_sensor THEN inc(acc); END_IF; *)
+
+
+(* system reset *)
+
+IF M_code_changed THEN inc(acc); END_IF; acc:= ROL(acc,1);
+IF M_system_reset THEN inc(acc); END_IF; acc:= ROL(acc,1);
+IF M_key = 1 THEN inc(acc); END_IF; acc:= ROL(acc,1);
+IF M_change_code THEN inc(acc); END_IF; acc:= ROL(acc,1);
+IF M_key = 10 THEN inc(acc); END_IF; acc:= ROL(acc,1);
+IF M_buzzer_key THEN inc(acc); END_IF; acc:= ROL(acc,1);
+IF M_poll_activation THEN inc(acc); END_IF; acc:= ROL(acc,1);
+IF I_sensor THEN inc(acc); END_IF;
+
+
+(* Save the word and the scan cycle time, 10x each *)
+(* "scan_cycle_num" datatype is INT *)
+
+scan_cycle_num := scan_cycle_num +1;
+
+IF acc &lt;&gt; last_acc AND %MW96&lt;140 THEN
+  %MW100[%MW96] := scan_cycle_num;
+  %MW96 := %MW96+1;
+  %MW100[%MW96] := acc;
+  %MW96 := %MW96+1;
+  last_acc := acc;
+END_IF;
+</STSource>
+	</program>
+	<dataBlock>
+		<variables name="I_sensor" typeName="EBOOL" topologicalAddress="%i0.2.1"></variables>
+		<variables name="M_Poll_Activation" typeName="EBOOL">
+			<comment>activates polling timer</comment>
+			<attribute name="TimeStampSource" value="0"></attribute>
+		</variables>
+		<variables name="M_buzzer_key" typeName="EBOOL"></variables>
+		<variables name="last_acc" typeName="INT"></variables>
+		<variables name="M_key" typeName="INT">
+			<comment>indicates the key pressed</comment>
+		</variables>
+		<variables name="M_system_reset" typeName="EBOOL">
+			<comment>perform system reset</comment>
+		</variables>
+		<variables name="scan_cycle_num" typeName="INT"></variables>
+		<variables name="acc" typeName="INT"></variables>
+		<variables name="M_code_changed" typeName="BOOL">
+			<comment>indicates code has been changed</comment>
+		</variables>
+		<variables name="M_change_code" typeName="EBOOL">
+			<comment>user wants to change code</comment>
+		</variables>
+	</dataBlock>
+</STExchangeFile>

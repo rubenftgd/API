@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<STExchangeFile>
+	<fileHeader company="Schneider Automation" product="Unity Pro XLS V13.0 - 170914B" dateTime="date_and_time#2019-3-21-10:18:31" content="Structured source file" DTDVersion="41"></fileHeader>
+	<contentHeader name="Project" version="0.0.8" dateTime="date_and_time#2019-3-18-11:22:35"></contentHeader>
+	<program>
+		<identProgram name="square_wave" type="section" task="MAST"></identProgram>
+		<STSource>
+TON_0 (IN := NOT(%M100) (*BOOL*),
+       PT := t#2000ms (*TIME*),
+       Q =&gt; %M100 (*BOOL*) ); 
+
+IF %M100 THEN %q0.4.1 :=NOT(%q0.4.1); END_IF;
+</STSource>
+	</program>
+	<dataBlock>
+		<variables name="TON_0" typeName="TON"></variables>
+	</dataBlock>
+</STExchangeFile>

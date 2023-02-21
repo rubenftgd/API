@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<STExchangeFile>
+	<fileHeader company="Schneider Automation" product="Unity Pro XLS V13.0 - 170914B" dateTime="date_and_time#2019-4-11-9:2:18" content="Structured source file" DTDVersion="41"></fileHeader>
+	<contentHeader name="Project" version="0.0.122" dateTime="date_and_time#2019-4-7-20:38:34"></contentHeader>
+	<program>
+		<identProgram name="mode" type="section" task="MAST"></identProgram>
+		<STSource>(*MODE DETECTION SUBROUTINE
+
+
+
+DETECTS SYSTEM MODE, BASED ON SWITCHES*)
+
+(* CONFIRMAR DESIGNAÇÕES DE MODOS *)
+(* CHAMAR SUBROTINAS RESTANTES *)
+(* RESTO OK *)
+
+IF (NOT I_DP) AND (NOT I_Ativo)
+	THEN
+	    M_MODE := 'OFF';
+ELSIF I_Ativo
+	THEN
+	    M_MODE := 'ACTIVE';
+	    SR_active ();
+	    IF I_Sensor
+	        THEN
+	    	    M_MODE := 'Alarm';
+
+
+	    END_IF;
+
+
+ELSIF I_DP
+	THEN
+    	    M_MODE := 'DP';
+END_IF;
+</STSource>
+	</program>
+	<dataBlock>
+		<variables name="I_sensor" typeName="EBOOL" topologicalAddress="%i0.2.2"></variables>
+		<variables name="I_DP" typeName="EBOOL" topologicalAddress="%i0.2.1">
+			<attribute name="TimeStampSource" value="0"></attribute>
+		</variables>
+		<variables name="I_Ativo" typeName="EBOOL" topologicalAddress="%i0.2.0"></variables>
+		<variables name="M_MODE" typeName="STRING">
+			<comment>mode indicator</comment>
+		</variables>
+		<variables name="O_Ativo" typeName="EBOOL" topologicalAddress="%q0.4.3"></variables>
+		<variables name="TON_Alarm_Enable" typeName="TON"></variables>
+		<variables name="O_Alarm" typeName="EBOOL" topologicalAddress="%q0.4.1"></variables>
+		<variables name="O_DP" typeName="EBOOL" topologicalAddress="%q0.4.2"></variables>
+		<variables name="TON_wait_for_buzzer" typeName="TON"></variables>
+	</dataBlock>
+	<program>
+		<identProgram name="SR_active" type="SR" task="MAST"></identProgram>
+		<LDSource nbColumns="11">
+			<networkLD>
+				<typeLine>
+					<emptyLine nbRows="1"></emptyLine>
+				</typeLine>
+				<typeLine>
+					<emptyCell nbCells="4"></emptyCell>
+					<FFBBlock instanceName="TON_Alarm_Enable" typeName="TON" additionnalPinNumber="0" enEnO="false" width="10" height="4">
+						<objPosition posX="4" posY="1"></objPosition>
+						<descriptionFFB execAfter="">
+							<inputVariable invertedPin="false" formalParameter="EN"></inputVariable>
+							<inputVariable invertedPin="false" formalParameter="IN"></inputVariable>
+							<inputVariable invertedPin="false" formalParameter="PT" effectiveParameter="t#30s"></inputVariable>
+							<outputVariable invertedPin="false" formalParameter="ENO"></outputVariable>
+							<outputVariable invertedPin="false" formalParameter="Q"></outputVariable>
+							<outputVariable invertedPin="false" formalParameter="ET"></outputVariable>
+						</descriptionFFB>
+					</FFBBlock>
+					<emptyCell nbCells="5"></emptyCell>
+				</typeLine>
+				<typeLine>
+					<emptyLine nbRows="1"></emptyLine>
+				</typeLine>
+				<typeLine>
+					<HLink nbCells="2"></HLink>
+					<contact typeContact="openContact" contactVariableName="I_Ativo"></contact>
+					<HLink nbCells="1"></HLink>
+					<emptyCell nbCells="7"></emptyCell>
+				</typeLine>
+				<typeLine>
+					<emptyLine nbRows="2"></emptyLine>
+				</typeLine>
+				<typeLine>
+					<HLink nbCells="2"></HLink>
+					<contact typeContact="openContact" contactVariableName="I_Ativo"></contact>
+					<HLink nbCells="3"></HLink>
+					<coil typeCoil="coil" coilVariableName="O_Ativo"></coil>
+					<HLink nbCells="4"></HLink>
+				</typeLine>
+				<typeLine>
+					<HLink nbCells="1"></HLink>
+					<contact typeContact="openContact" contactVariableName="TON_Alarm_Enable.Q"></contact>
+					<HLink nbCells="1"></HLink>
+					<contact typeContact="openContact" contactVariableName="I_Sensor"></contact>
+					<shortCircuit>
+						<VLink></VLink>
+						<HLink nbCells="1"></HLink>
+					</shortCircuit>
+					<HLink nbCells="1"></HLink>
+					<coil typeCoil="coil" coilVariableName="O_Alarm"></coil>
+					<HLink nbCells="4"></HLink>
+				</typeLine>
+				<typeLine>
+					<emptyCell nbCells="4"></emptyCell>
+					<VLink></VLink>
+					<emptyCell nbCells="6"></emptyCell>
+				</typeLine>
+				<typeLine>
+					<emptyCell nbCells="4"></emptyCell>
+					<VLink></VLink>
+					<emptyCell nbCells="1"></emptyCell>
+					<FFBBlock instanceName="TON_wait_for_buzzer" typeName="TON" additionnalPinNumber="0" enEnO="false" width="10" height="4">
+						<objPosition posX="6" posY="9"></objPosition>
+						<descriptionFFB execAfter="">
+							<inputVariable invertedPin="false" formalParameter="EN"></inputVariable>
+							<inputVariable invertedPin="false" formalParameter="IN"></inputVariable>
+							<inputVariable invertedPin="false" formalParameter="PT" effectiveParameter="t#5s"></inputVariable>
+							<outputVariable invertedPin="false" formalParameter="ENO"></outputVariable>
+							<outputVariable invertedPin="false" formalParameter="Q"></outputVariable>
+							<outputVariable invertedPin="false" formalParameter="ET"></outputVariable>
+						</descriptionFFB>
+					</FFBBlock>
+					<emptyCell nbCells="3"></emptyCell>
+				</typeLine>
+				<typeLine>
+					<emptyCell nbCells="4"></emptyCell>
+					<VLink></VLink>
+					<emptyCell nbCells="6"></emptyCell>
+				</typeLine>
+				<typeLine>
+					<emptyCell nbCells="5"></emptyCell>
+					<HLink nbCells="1"></HLink>
+					<emptyCell nbCells="2"></emptyCell>
+					<coil typeCoil="coil" coilVariableName="O_DP"></coil>
+					<HLink nbCells="2"></HLink>
+				</typeLine>
+				<typeLine>
+					<emptyLine nbRows="88"></emptyLine>
+				</typeLine>
+				<textBox width="3" height="1">ALTERAR PARA BUZZER<objPosition posX="7" posY="13"></objPosition>
+				</textBox>
+			</networkLD>
+		</LDSource>
+	</program>
+</STExchangeFile>

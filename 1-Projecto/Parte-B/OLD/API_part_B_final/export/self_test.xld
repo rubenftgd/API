@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<LDExchangeFile>
+	<fileHeader company="Schneider Automation" product="Unity Pro XLS V13.0 - 170914B" dateTime="date_and_time#2019-4-11-9:2:26" content="Ladder source file" DTDVersion="41"></fileHeader>
+	<contentHeader name="Project" version="0.0.122" dateTime="date_and_time#2019-4-7-20:38:34"></contentHeader>
+	<program>
+		<identProgram name="SELF_TEST" type="SR" task="MAST"></identProgram>
+		<LDSource nbColumns="11">
+			<networkLD>
+				<typeLine>
+					<emptyLine nbRows="3"></emptyLine>
+				</typeLine>
+				<typeLine>
+					<emptyCell nbCells="5"></emptyCell>
+					<FFBBlock instanceName="TON_wait_between_key_2" typeName="TON" additionnalPinNumber="0" enEnO="false" width="10" height="4">
+						<objPosition posX="5" posY="3"></objPosition>
+						<descriptionFFB execAfter="">
+							<inputVariable invertedPin="false" formalParameter="EN"></inputVariable>
+							<inputVariable invertedPin="false" formalParameter="IN"></inputVariable>
+							<inputVariable invertedPin="false" formalParameter="PT" effectiveParameter="t#0.6s"></inputVariable>
+							<outputVariable invertedPin="false" formalParameter="ENO"></outputVariable>
+							<outputVariable invertedPin="false" formalParameter="Q"></outputVariable>
+							<outputVariable invertedPin="false" formalParameter="ET"></outputVariable>
+						</descriptionFFB>
+					</FFBBlock>
+					<emptyCell nbCells="4"></emptyCell>
+				</typeLine>
+				<typeLine>
+					<emptyLine nbRows="1"></emptyLine>
+				</typeLine>
+				<typeLine>
+					<HLink nbCells="1"></HLink>
+					<contact typeContact="openContact" contactVariableName="I_sensor"></contact>
+					<HLink nbCells="1"></HLink>
+					<contact typeContact="closedContact" contactVariableName="TON_3.Q"></contact>
+					<HLink nbCells="1"></HLink>
+					<emptyCell nbCells="6"></emptyCell>
+				</typeLine>
+				<typeLine>
+					<emptyLine nbRows="2"></emptyLine>
+				</typeLine>
+				<typeLine>
+					<emptyCell nbCells="5"></emptyCell>
+					<FFBBlock instanceName="TON_1" typeName="TON" additionnalPinNumber="0" enEnO="false" width="10" height="4">
+						<objPosition posX="5" posY="8"></objPosition>
+						<descriptionFFB execAfter="">
+							<inputVariable invertedPin="false" formalParameter="EN"></inputVariable>
+							<inputVariable invertedPin="false" formalParameter="IN"></inputVariable>
+							<inputVariable invertedPin="false" formalParameter="PT" effectiveParameter="t#0.6s"></inputVariable>
+							<outputVariable invertedPin="false" formalParameter="ENO"></outputVariable>
+							<outputVariable invertedPin="false" formalParameter="Q"></outputVariable>
+							<outputVariable invertedPin="false" formalParameter="ET"></outputVariable>
+						</descriptionFFB>
+					</FFBBlock>
+					<emptyCell nbCells="4"></emptyCell>
+				</typeLine>
+				<typeLine>
+					<emptyLine nbRows="1"></emptyLine>
+				</typeLine>
+				<typeLine>
+					<HLink nbCells="1"></HLink>
+					<contact typeContact="openContact" contactVariableName="I_sensor"></contact>
+					<HLink nbCells="1"></HLink>
+					<contact typeContact="openContact" contactVariableName="TON_wait_between_key_2.Q"></contact>
+					<HLink nbCells="1"></HLink>
+					<emptyCell nbCells="6"></emptyCell>
+				</typeLine>
+				<typeLine>
+					<emptyLine nbRows="2"></emptyLine>
+				</typeLine>
+				<typeLine>
+					<emptyCell nbCells="5"></emptyCell>
+					<FFBBlock instanceName="TON_2" typeName="TON" additionnalPinNumber="0" enEnO="false" width="10" height="4">
+						<objPosition posX="5" posY="13"></objPosition>
+						<descriptionFFB execAfter="">
+							<inputVariable invertedPin="false" formalParameter="EN"></inputVariable>
+							<inputVariable invertedPin="false" formalParameter="IN"></inputVariable>
+							<inputVariable invertedPin="false" formalParameter="PT" effectiveParameter="t#0.6s"></inputVariable>
+							<outputVariable invertedPin="false" formalParameter="ENO"></outputVariable>
+							<outputVariable invertedPin="false" formalParameter="Q"></outputVariable>
+							<outputVariable invertedPin="false" formalParameter="ET"></outputVariable>
+						</descriptionFFB>
+					</FFBBlock>
+					<emptyCell nbCells="4"></emptyCell>
+				</typeLine>
+				<typeLine>
+					<emptyLine nbRows="1"></emptyLine>
+				</typeLine>
+				<typeLine>
+					<HLink nbCells="1"></HLink>
+					<contact typeContact="openContact" contactVariableName="I_sensor"></contact>
+					<HLink nbCells="1"></HLink>
+					<contact typeContact="openContact" contactVariableName="TON_1.Q"></contact>
+					<HLink nbCells="1"></HLink>
+					<emptyCell nbCells="6"></emptyCell>
+				</typeLine>
+				<typeLine>
+					<emptyLine nbRows="2"></emptyLine>
+				</typeLine>
+				<typeLine>
+					<emptyCell nbCells="5"></emptyCell>
+					<FFBBlock instanceName="TON_3" typeName="TON" additionnalPinNumber="0" enEnO="false" width="10" height="4">
+						<objPosition posX="5" posY="18"></objPosition>
+						<descriptionFFB execAfter="">
+							<inputVariable invertedPin="false" formalParameter="EN"></inputVariable>
+							<inputVariable invertedPin="false" formalParameter="IN"></inputVariable>
+							<inputVariable invertedPin="false" formalParameter="PT" effectiveParameter="t#0.5s"></inputVariable>
+							<outputVariable invertedPin="false" formalParameter="ENO"></outputVariable>
+							<outputVariable invertedPin="false" formalParameter="Q"></outputVariable>
+							<outputVariable invertedPin="false" formalParameter="ET"></outputVariable>
+						</descriptionFFB>
+					</FFBBlock>
+					<emptyCell nbCells="4"></emptyCell>
+				</typeLine>
+				<typeLine>
+					<emptyLine nbRows="1"></emptyLine>
+				</typeLine>
+				<typeLine>
+					<HLink nbCells="1"></HLink>
+					<contact typeContact="openContact" contactVariableName="I_sensor"></contact>
+					<HLink nbCells="1"></HLink>
+					<contact typeContact="openContact" contactVariableName="TON_2.Q"></contact>
+					<HLink nbCells="1"></HLink>
+					<emptyCell nbCells="6"></emptyCell>
+				</typeLine>
+				<typeLine>
+					<emptyLine nbRows="5"></emptyLine>
+				</typeLine>
+				<typeLine>
+					<HLink nbCells="1"></HLink>
+					<contact typeContact="openContact" contactVariableName="I_sensor"></contact>
+					<HLink nbCells="1"></HLink>
+					<contact typeContact="closedContact" contactVariableName="TON_3.Q"></contact>
+					<contact typeContact="closedContact" contactVariableName="TON_wait_between_key_2.Q"></contact>
+					<HLink nbCells="2"></HLink>
+					<coil typeCoil="coil" coilVariableName="O_Ativo"></coil>
+					<HLink nbCells="3"></HLink>
+				</typeLine>
+				<typeLine>
+					<emptyLine nbRows="1"></emptyLine>
+				</typeLine>
+				<typeLine>
+					<HLink nbCells="1"></HLink>
+					<contact typeContact="openContact" contactVariableName="I_sensor"></contact>
+					<HLink nbCells="1"></HLink>
+					<contact typeContact="openContact" contactVariableName="TON_wait_between_key_2.Q"></contact>
+					<contact typeContact="closedContact" contactVariableName="TON_1.Q"></contact>
+					<HLink nbCells="2"></HLink>
+					<coil typeCoil="coil" coilVariableName="O_DP"></coil>
+					<HLink nbCells="3"></HLink>
+				</typeLine>
+				<typeLine>
+					<emptyLine nbRows="1"></emptyLine>
+				</typeLine>
+				<typeLine>
+					<HLink nbCells="1"></HLink>
+					<contact typeContact="openContact" contactVariableName="I_sensor"></contact>
+					<HLink nbCells="1"></HLink>
+					<contact typeContact="openContact" contactVariableName="TON_1.Q"></contact>
+					<contact typeContact="closedContact" contactVariableName="TON_2.Q"></contact>
+					<HLink nbCells="2"></HLink>
+					<coil typeCoil="coil" coilVariableName="O_Alarm"></coil>
+					<HLink nbCells="3"></HLink>
+				</typeLine>
+				<typeLine>
+					<emptyLine nbRows="1"></emptyLine>
+				</typeLine>
+				<typeLine>
+					<HLink nbCells="1"></HLink>
+					<contact typeContact="openContact" contactVariableName="I_sensor"></contact>
+					<HLink nbCells="1"></HLink>
+					<contact typeContact="openContact" contactVariableName="TON_1.Q"></contact>
+					<contact typeContact="closedContact" contactVariableName="TON_2.Q"></contact>
+					<HLink nbCells="2"></HLink>
+					<coil typeCoil="coil" coilVariableName="M_buzzer_on_test"></coil>
+					<HLink nbCells="3"></HLink>
+				</typeLine>
+				<typeLine>
+					<emptyLine nbRows="67"></emptyLine>
+				</typeLine>
+				<textBox width="8" height="1">Mudar comando activação; executar apenas 1x por activação de alarme<objPosition posX="1" posY="1"></objPosition>
+				</textBox>
+			</networkLD>
+		</LDSource>
+	</program>
+	<dataBlock>
+		<variables name="TON_wait_between_key_2" typeName="TON"></variables>
+		<variables name="TON_2" typeName="TON"></variables>
+		<variables name="O_Ativo" typeName="EBOOL" topologicalAddress="%q0.4.3"></variables>
+		<variables name="I_sensor" typeName="EBOOL" topologicalAddress="%i0.2.2"></variables>
+		<variables name="TON_3" typeName="TON"></variables>
+		<variables name="M_buzzer_on_test" typeName="EBOOL"></variables>
+		<variables name="TON_1" typeName="TON"></variables>
+		<variables name="O_Alarm" typeName="EBOOL" topologicalAddress="%q0.4.1"></variables>
+		<variables name="O_DP" typeName="EBOOL" topologicalAddress="%q0.4.2"></variables>
+	</dataBlock>
+</LDExchangeFile>

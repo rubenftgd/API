@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<STExchangeFile>
+	<fileHeader company="Schneider Automation" product="Unity Pro XLS V13.0 - 170914B" dateTime="date_and_time#2019-4-18-17:18:46" content="Structured source file" DTDVersion="41"></fileHeader>
+	<contentHeader name="Project" version="0.0.46" dateTime="date_and_time#2019-4-18-17:51:36"></contentHeader>
+	<program>
+		<identProgram name="SR_DP" type="SR" task="MAST"></identProgram>
+		<STSource>(* DP *)
+TOF_1 (IN := I_sensor(*BOOL*),
+       PT := t#1S(*TIME*),
+       Q =&gt; %M17(*BOOL*));
+
+TOF_2 (IN := I_sensor(*BOOL*),
+       PT := t#5S(*TIME*),
+       Q =&gt; %M18(*BOOL*));
+
+(* luz DP *)
+O_DP := %M18;
+(*Buzzer*)
+O_Buzzer := %M17;
+</STSource>
+	</program>
+	<dataBlock>
+		<variables name="I_sensor" typeName="EBOOL" topologicalAddress="%i0.2.2">
+			<attribute name="TimeStampSource" value="0"></attribute>
+		</variables>
+		<variables name="TOF_2" typeName="TOF"></variables>
+		<variables name="O_DP" typeName="EBOOL" topologicalAddress="%q0.4.2">
+			<attribute name="TimeStampSource" value="0"></attribute>
+		</variables>
+		<variables name="O_Buzzer" typeName="EBOOL" topologicalAddress="%q0.4.0">
+			<comment>buzzer output</comment>
+			<attribute name="TimeStampSource" value="0"></attribute>
+		</variables>
+		<variables name="TOF_1" typeName="TOF"></variables>
+	</dataBlock>
+</STExchangeFile>

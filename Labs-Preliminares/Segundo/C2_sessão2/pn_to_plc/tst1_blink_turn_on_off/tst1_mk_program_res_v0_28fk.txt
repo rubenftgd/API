@@ -1,0 +1,77 @@
+
+(* --- PNC: Petri net initialization --- *)
+
+IF %MW100=0 THEN
+ %MW201:=1; %MW202:=0; %MW203:=0; %MW204:=0;
+ %MW100:=1;
+END_IF;
+
+(* --- PNC: Map inputs --- *)
+
+%MW104 := BOOL_TO_INT( %i0.3.0 );
+%MW105 := BOOL_TO_INT( NOT(%i0.3.0) );
+
+(* --- PNC: Timed transitions --- *)
+
+MY_TON_1(IN := INT_TO_BOOL(%MW201) (*BOOL*),
+          PT := t#500ms (*TIME*),
+          Q => timer_output_flag (*BOOL*),
+          ET => my_time_1 (*TIME*));
+%MW101:= BOOL_TO_INT(timer_output_flag);
+MY_TON_2(IN := INT_TO_BOOL(%MW202) (*BOOL*),
+          PT := t#500ms (*TIME*),
+          Q => timer_output_flag (*BOOL*),
+          ET => my_time_2 (*TIME*));
+%MW102:= BOOL_TO_INT(timer_output_flag);
+MY_TON_3(IN := INT_TO_BOOL(%MW203) (*BOOL*),
+          PT := t#500ms (*TIME*),
+          Q => timer_output_flag (*BOOL*),
+          ET => my_time_3 (*TIME*));
+%MW103:= BOOL_TO_INT(timer_output_flag);
+
+(* --- PNC: Petri net loop code --- *)
+
+IF %MW104>0 AND %MW201>=1
+THEN
+ %MW201:=%MW201-1;
+ %MW204:=%MW204+1;
+END_IF;
+
+IF %MW101>0 AND %MW201>=1
+THEN
+ %MW201:=%MW201-1;
+ %MW202:=%MW202+1;
+END_IF;
+
+IF %MW102>0 AND %MW202>=1
+THEN
+ %MW202:=%MW202-1;
+ %MW203:=%MW203+1;
+END_IF;
+
+IF %MW103>0 AND %MW203>=1
+THEN
+ %MW203:=%MW203-1;
+ %MW201:=%MW201+1;
+END_IF;
+
+IF %MW105>0 AND %MW204>=1
+THEN
+ %MW204:=%MW204-1;
+ %MW201:=%MW201+1;
+END_IF;
+
+(* --- PNC: Output bits --- *)
+
+IF INT_TO_BOOL(%MW201)
+THEN SET(%q0.3.16);
+ELSE RESET(%q0.3.16);
+END_IF;
+IF INT_TO_BOOL(%MW202)
+THEN SET(%q0.3.17);
+ELSE RESET(%q0.3.17);
+END_IF;
+IF INT_TO_BOOL(%MW203)
+THEN SET(%q0.3.18);
+ELSE RESET(%q0.3.18);
+END_IF;

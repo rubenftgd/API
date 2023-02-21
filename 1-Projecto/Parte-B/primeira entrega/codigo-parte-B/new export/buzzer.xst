@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<STExchangeFile>
+	<fileHeader company="Schneider Automation" product="Unity Pro XLS V13.0 - 170914B" dateTime="date_and_time#2019-4-18-17:18:36" content="Structured source file" DTDVersion="41"></fileHeader>
+	<contentHeader name="Project" version="0.0.46" dateTime="date_and_time#2019-4-18-17:51:36"></contentHeader>
+	<program>
+		<identProgram name="buzzer" type="SR" task="MAST"></identProgram>
+		<STSource>
+(* VERIFICAR ACTIVAÇÃO DO BUZZER POR KBD POLL (NA PLC)  *)
+
+TON_5 	(IN := NOT(%M22) (*BOOL*),
+	 PT := t#2s(*TIME*),
+	 Q =&gt; %M23 (*BOOL*)); 
+
+TON_6   (IN := %M23 (*BOOL*),
+	 PT := t#1s(*TIME*),
+         Q =&gt; %M22 (*BOOL*));
+
+
+
+(* se não está off *)
+IF NOT M_buzzer_uncond_off
+    THEN
+    	(* se corre em modo ciclico, timer... *)
+(* 	IF M_buzzer_key
+	    THEN O_Buzzer := TRUE; *)
+	IF M_buzzer_cycle
+	    THEN
+	        IF (%M23 AND Not %M22)
+   		THEN
+	 	    O_DP := TRUE;
+   	 	ELSE 
+	    	    O_DP := FALSE;
+		END_IF;
+	(* MODO TESTE *)
+	ELSIF M_buzzer_on_test
+	    THEN O_buzzer := TRUE;
+	(*MODO 1*)
+	ELSIF M_buzzer_on_1
+	    THEN O_buzzer := TRUE;
+	(*MODO 2*)
+	ELSIF M_buzzer_on_2
+	    THEN O_buzzer := TRUE;
+	(*Tecla premida no teclado*)
+ 	ELSE
+	    O_Buzzer := FALSE;
+	END_IF;
+    ELSE
+        (*buzzer off_master*)
+	O_buzzer := FALSE;
+END_IF;
+</STSource>
+	</program>
+	<dataBlock>
+		<variables name="M_buzzer_cycle" typeName="EBOOL">
+			<comment>buzzer on_off cycle</comment>
+			<attribute name="TimeStampSource" value="0"></attribute>
+		</variables>
+		<variables name="M_buzzer_uncond_off" typeName="EBOOL">
+			<comment>buzzer unconditional off</comment>
+			<attribute name="TimeStampSource" value="0"></attribute>
+		</variables>
+		<variables name="M_buzzer_on_1" typeName="EBOOL">
+			<comment>buzzer on 1</comment>
+			<attribute name="TimeStampSource" value="0"></attribute>
+		</variables>
+		<variables name="M_buzzer_on_2" typeName="EBOOL">
+			<comment>buzzer on 2</comment>
+			<attribute name="TimeStampSource" value="0"></attribute>
+		</variables>
+		<variables name="TON_5" typeName="TON"></variables>
+		<variables name="TON_6" typeName="TON"></variables>
+		<variables name="O_DP" typeName="EBOOL" topologicalAddress="%q0.4.2">
+			<attribute name="TimeStampSource" value="0"></attribute>
+		</variables>
+		<variables name="O_Buzzer" typeName="EBOOL" topologicalAddress="%q0.4.0">
+			<comment>buzzer output</comment>
+			<attribute name="TimeStampSource" value="0"></attribute>
+		</variables>
+		<variables name="M_buzzer_on_test" typeName="EBOOL"></variables>
+	</dataBlock>
+</STExchangeFile>

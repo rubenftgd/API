@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<STExchangeFile>
+	<fileHeader company="Schneider Automation" product="Unity Pro XLS V13.0 - 170914B" dateTime="date_and_time#2019-4-18-17:18:25" content="Structured source file" DTDVersion="41"></fileHeader>
+	<contentHeader name="Project" version="0.0.46" dateTime="date_and_time#2019-4-18-17:51:36"></contentHeader>
+	<program>
+		<identProgram name="polling_timer_v3" type="SR" task="MAST"></identProgram>
+		<STSource>
+(* Polling timeout, maximum wait for 1 key press *)
+TON_POLL (IN := M_Poll_Activation(*BOOL*),
+          PT := t#30000ms(*TIME*) , 
+          Q =&gt; M_poll_timeout(*BOOL*));
+
+
+(* Time to poll each column of keyboard *)
+TP_Polling (IN := NOT M_poll_timeout_COL (* AND M_Poll_Activation (*BOOL * ) *),
+            PT := t#30ms(*TIME*),
+            Q =&gt; M_poll_timeout_COL(*BOOL*));
+
+(* TP_Silence (IN := NOT(M_poll_Timeout_COL)(*BOOL* ),
+      PT := t#4ms (*TIME* ),
+      Q =&gt; M_poll_silence(*BOOL* ) ); *)
+
+
+
+
+
+(* IF M_key_wait THEN O_Alarm :=NOT(O_Alarm); END_IF; *)
+</STSource>
+	</program>
+	<dataBlock>
+		<variables name="M_poll_timeout" typeName="EBOOL">
+			<comment>Indicates kbd poll timeout</comment>
+			<attribute name="TimeStampSource" value="0"></attribute>
+		</variables>
+		<variables name="TON_POLL" typeName="TON"></variables>
+		<variables name="M_poll_timeout_COL" typeName="EBOOL">
+			<comment>indicates timeouts of column scanning</comment>
+		</variables>
+		<variables name="TP_Polling" typeName="TP"></variables>
+		<variables name="M_Poll_Activation" typeName="EBOOL">
+			<comment>activates polling timer</comment>
+			<attribute name="TimeStampSource" value="0"></attribute>
+		</variables>
+	</dataBlock>
+</STExchangeFile>

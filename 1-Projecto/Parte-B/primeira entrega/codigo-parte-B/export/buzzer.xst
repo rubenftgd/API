@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<STExchangeFile>
+	<fileHeader company="Schneider Automation" product="Unity Pro XLS V13.0 - 170914B" dateTime="date_and_time#2019-4-11-9:2:32" content="Structured source file" DTDVersion="41"></fileHeader>
+	<contentHeader name="Project" version="0.0.122" dateTime="date_and_time#2019-4-7-20:38:34"></contentHeader>
+	<program>
+		<identProgram name="buzzer" type="SR" task="MAST"></identProgram>
+		<STSource>(* CORRIGIR MODOS/DESIGNAÇÃO DOS MODOS.../ELIMINAR DESNECESSÁRIOS *)
+(* trocar O_Alarm pelo O_buzzer *)
+
+(* NECESSÁRIO CORRIGIR TIMER DE MODO BUZZER_CYCLE!! *)
+
+(* VERIFICAR ACTIVAÇÃO DO BUZZER POR KBD POLL (NA PLC)  *)
+
+(* se não está off *)
+IF NOT M_buzzer_uncond_off
+    THEN
+    	(* se corre em modo ciclico, timer... *)
+        IF M_buzzer_cycle
+	    THEN
+		(* MUDAR PARA TIMING CORRECTO *)
+		(* Corre timer*)
+	        TON_5 (IN := NOT(M_buzzer_timer_aux) (*BOOL*),
+                PT := t#250ms (*TIME*),
+                Q =&gt; %m20 (*BOOL*) ); 
+               IF %M20 THEN O_Alarm :=NOT(O_Alarm); END_IF;
+	
+	(* MODO TESTE *)
+	ELSIF M_buzzer_on_test
+	    THEN O_Alarm := TRUE;
+
+	(*MODO 1*)
+	ELSIF M_buzzer_on_1
+	    THEN O_Alarm := TRUE;
+
+	(*MODO 2*)
+	ELSIF M_buzzer_on_2
+	    THEN O_Alarm := TRUE;
+
+	(*Tecla premida no teclado*)
+	ELSIF M_key_pressed_ack
+	(* CORRIGIR/VERIFICAR ISTO *)
+	    THEN
+		TP_keypress_ack (IN := M_key_pressed_ack(*BOOL*),
+	                         PT := t#50ms (*TIME*),
+	                 	 Q =&gt; O_Alarm(*BOOL*));
+		(* IF FE(O_Alarm)
+		    THEN
+		        M_key_pressed_ack := FALSE;
+		END_IF; *)
+	ELSE
+	(*buzzer off*)
+	    O_Alarm := FALSE;
+	END_IF;
+    ELSE
+        (*buzzer off_master*)
+	O_Alarm := FALSE;
+END_IF;
+</STSource>
+	</program>
+	<dataBlock>
+		<variables name="M_key_pressed_ack" typeName="EBOOL" topologicalAddress="%m16">
+			<comment>key pressed ack</comment>
+		</variables>
+		<variables name="TP_keypress_ack" typeName="TP"></variables>
+		<variables name="TON_5" typeName="TON"></variables>
+		<variables name="M_buzzer_uncond_off" typeName="EBOOL" topologicalAddress="%m13">
+			<comment>buzzer unconditional off</comment>
+			<attribute name="TimeStampSource" value="0"></attribute>
+		</variables>
+		<variables name="M_buzzer_cycle" typeName="EBOOL" topologicalAddress="%m14">
+			<comment>buzzer on_off cycle</comment>
+			<attribute name="TimeStampSource" value="0"></attribute>
+		</variables>
+		<variables name="M_buzzer_on_2" typeName="EBOOL" topologicalAddress="%m12">
+			<comment>buzzer on 2</comment>
+			<attribute name="TimeStampSource" value="0"></attribute>
+		</variables>
+		<variables name="M_buzzer_timer_aux" typeName="EBOOL">
+			<attribute name="TimeStampSource" value="0"></attribute>
+		</variables>
+		<variables name="M_buzzer_on_1" typeName="EBOOL" topologicalAddress="%m11">
+			<comment>buzzer on 1</comment>
+			<attribute name="TimeStampSource" value="0"></attribute>
+		</variables>
+		<variables name="M_buzzer_on_test" typeName="EBOOL"></variables>
+		<variables name="O_Alarm" typeName="EBOOL" topologicalAddress="%q0.4.1"></variables>
+	</dataBlock>
+</STExchangeFile>

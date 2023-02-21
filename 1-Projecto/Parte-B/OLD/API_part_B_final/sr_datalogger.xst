@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<STExchangeFile>
+	<fileHeader company="Schneider Automation" product="Unity Pro XLS V13.0 - 170914B" dateTime="date_and_time#2019-4-11-14:23:18" content="Structured source file" DTDVersion="41"></fileHeader>
+	<contentHeader name="Project" version="0.0.114" dateTime="date_and_time#2019-4-3-15:54:4"></contentHeader>
+	<program>
+		<identProgram name="datalogger" type="section" task="MAST"></identProgram>
+		<STSource>(* Memory based logging *)
+
+(* Occupies %MW96..%MW99 aux data, %MW100..%MW139 buffer *)
+(* Other variables: acc, last_acc, scan_cycle_num *)
+
+(* Mark in memory the data logging will be happening *)
+IF %MW97 = 0 THEN
+  %MW97 := 12345;
+  %MW98 := 12345;
+  %MW99 := 2010; (* Matlab matrix 2 x 10 *)
+END_IF;
+
+(* Create a word collecting all inputs *)
+(* "acc" datatype is INT *)
+
+acc:=0;
+IF %i0.2.15 THEN inc(acc); END_IF; acc:= ROL(acc,1);
+IF %i0.2.14 THEN inc(acc); END_IF; acc:= ROL(acc,1);
+IF %i0.2.13 THEN inc(acc); END_IF; acc:= ROL(acc,1);
+IF %i0.2.12 THEN inc(acc); END_IF; acc:= ROL(acc,1);
+IF %i0.2.11 THEN inc(acc); END_IF; acc:= ROL(acc,1);
+IF %i0.2.10 THEN inc(acc); END_IF; acc:= ROL(acc,1);
+IF %i0.2.9 THEN inc(acc); END_IF; acc:= ROL(acc,1);
+IF %i0.2.8 THEN inc(acc); END_IF; acc:= ROL(acc,1);
+IF %i0.2.7 THEN inc(acc); END_IF; acc:= ROL(acc,1);
+IF %i0.2.6 THEN inc(acc); END_IF; acc:= ROL(acc,1);
+IF %i0.2.5 THEN inc(acc); END_IF; acc:= ROL(acc,1);
+IF %i0.2.4 THEN inc(acc); END_IF; acc:= ROL(acc,1);
+IF %i0.2.3 THEN inc(acc); END_IF; acc:= ROL(acc,1);
+IF %i0.2.2 THEN inc(acc); END_IF; acc:= ROL(acc,1);
+IF %i0.2.1 THEN inc(acc); END_IF; acc:= ROL(acc,1);
+IF %i0.2.0 THEN inc(acc); END_IF;
+
+(* Save the word and the scan cycle time, 10x each *)
+(* "scan_cycle_num" datatype is INT *)
+
+scan_cycle_num := scan_cycle_num +1;
+
+IF acc &lt;&gt; last_acc AND %MW96&lt;20 THEN
+  %MW100[%MW96] := scan_cycle_num;
+  %MW96 := %MW96+1;
+  %MW100[%MW96] := acc;
+  %MW96 := %MW96+1;
+  last_acc := acc;
+END_IF;
+</STSource>
+	</program>
+	<dataBlock>
+		<variables name="acc" typeName="INT"></variables>
+		<variables name="scan_cycle_num" typeName="INT"></variables>
+		<variables name="last_acc" typeName="INT"></variables>
+	</dataBlock>
+</STExchangeFile>

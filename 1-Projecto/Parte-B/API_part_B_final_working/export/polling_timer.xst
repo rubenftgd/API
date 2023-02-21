@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<STExchangeFile>
+	<fileHeader company="Schneider Automation" product="Unity Pro XLS V13.0 - 170914B" dateTime="date_and_time#2019-4-11-9:2:44" content="Structured source file" DTDVersion="41"></fileHeader>
+	<contentHeader name="Project" version="0.0.122" dateTime="date_and_time#2019-4-7-20:38:34"></contentHeader>
+	<program>
+		<identProgram name="polling_timer_v3" type="SR" task="MAST"></identProgram>
+		<STSource>(* CHANGE TIMINGS BEFORE RUNNING IN PLC
+
+(HUGE VALUES USED TO ALLOW SIMULATOR TESTING...)
+
+ *)
+(* Polling timeout, maximum wait for 1 key press *)
+TON_POLL (IN := M_Poll_Activation(*BOOL*),
+          PT := t#450ms(*TIME*) , 
+          Q =&gt; M_poll_timeout(*BOOL*));
+
+
+(* Time to poll each column of keyboard *)
+TP_Polling (IN := NOT M_poll_timeout_COL (* AND M_Poll_Activation (*BOOL * ) *),
+            PT := t#15ms(*TIME*),
+            Q =&gt; M_poll_timeout_COL(*BOOL*));
+
+TP_Silence (IN := NOT(M_poll_Timeout_COL)(*BOOL*),
+      PT := t#4ms (*TIME*),
+      Q =&gt; M_poll_silence(*BOOL*) );
+
+
+TP_wait_between_key (IN := NOT M_key_wait,
+                     PT := t#500ms,
+                     Q =&gt; M_key_wait);
+IF M_key_wait THEN O_Alarm :=NOT(O_Alarm); END_IF;
+</STSource>
+	</program>
+	<dataBlock>
+		<variables name="TP_wait_between_key" typeName="TP"></variables>
+		<variables name="M_poll_silence" typeName="EBOOL"></variables>
+		<variables name="TON_POLL" typeName="TON"></variables>
+		<variables name="TP_Silence" typeName="TP"></variables>
+		<variables name="M_poll_timeout" typeName="EBOOL" topologicalAddress="%m22">
+			<comment>Indicates kbd poll timeout</comment>
+			<attribute name="TimeStampSource" value="0"></attribute>
+		</variables>
+		<variables name="M_key_wait" typeName="EBOOL">
+			<comment>can scan 1 more key</comment>
+		</variables>
+		<variables name="M_Poll_Activation" typeName="EBOOL" topologicalAddress="%m21">
+			<comment>activates polling timer</comment>
+			<attribute name="TimeStampSource" value="0"></attribute>
+		</variables>
+		<variables name="M_poll_timeout_COL" typeName="EBOOL">
+			<comment>indicates timeouts of column scanning</comment>
+		</variables>
+		<variables name="O_Alarm" typeName="EBOOL" topologicalAddress="%q0.4.1"></variables>
+		<variables name="TP_Polling" typeName="TP"></variables>
+	</dataBlock>
+</STExchangeFile>
